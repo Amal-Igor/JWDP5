@@ -3,26 +3,76 @@
     max-width: 1920px;
 }
 
+body{
+    height: auto;
+
+
+    display: grid;
+    grid-template-areas: "header" 
+                        "banner" 
+                        "content-grid"
+                        "footer";
+                            
+}
+
+/*Body Grid-Layout*/
+.header-grid{
+    grid-area: header;
+}
+
+.banner-grid{
+    grid-area: banner;
+}
+
+.content-grid{
+    grid-area: content-grid;
+}
+
+.footer-grid{
+    grid-area: footer;
+}
+
 header{
     height: 5em;
 }
 
 /*Bannière du site*/
 .banner{
-    height: 15rem;
-    background-color: #dee1e5;
+    height: 10rem;
+    background-color: #70767c4f;
   
 }
 
 /*Main*/
 main{
-    height: 90vh;
-    width: 65%;
+    width: 73%;
     padding-top: 5em;
+    padding-bottom: 2em;
 }
 
 /*Taille des images produits*/
 .product-img{
     width: 100%;
     height: 150px;
+    object-fit: cover;
 }
+
+/*Produits*/
+.product-name{
+    font-size: 19px;
+}
+
+.product-description{
+    padding: 0.5em .3em;
+}
+
+#article-card-0, #article-card-1, #article-card-2, #article-card-3, #article-card-4 {
+    overflow: hidden;
+    padding-right: 0;
+    padding-left: 0;
+    margin: 10px 3px;
+    border-radius: 25px 25px 0 0;
+    max-width: 30%;
+    border: 5px double rgba(35,34,34,0.18);
+}
+

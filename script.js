@@ -26,9 +26,9 @@ getProductPrice = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
         document.getElementById(`price-art-${i}`).innerText = data[i].price + '€'}}
+    )
 
-        .catch(error => console.log("Erreur" + error))
-        )
+    .catch(error => console.log("Erreur" + error))
 
 
     

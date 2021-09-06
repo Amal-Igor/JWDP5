@@ -16,56 +16,60 @@
 
     <title>Orinoco !</title>
 </head>
-<body>
-    <header class="navbar bg-dark w-100">
+<body class="body-layout">
+    <header class="navbar bg-dark w-100 head-grid">
         <div class="navbar-brand logo"></div>
 
         <div class="nav-link text-light basket">Panier</div>
     </header>
 
-<div class="container-fluid d-flex justify-content-center banner"></div>
+<div class="container-fluid d-flex justify-content-center banner banner-grid"></div>
 
-<div class="container-fluid d-flex justify-content-center ">
+<div class="container-fluid d-flex justify-content-center content-grid">
     <main class="row justify-content-around text-center flex-wrap">
-        <article id="article-card-1" class="card">
-            <img src="" class="product-img" id="img-art-1">
-            <div class="product-description card-body d-flex justify-content-between ">
-                <h2 id ="name-art-1" class="product-name"></h2>
+        <article id="article-card-0" class="product-card col-xl-4">
+            <img src="" class="product-img" id="img-art-0">
+            <div class="product-description d-flex justify-content-between ">
+                <h2 id ="name-art-0" class="product-name"></h2>
+                <p id="price-art-0" class="product-price"></p>
+            </div>
+        </article>
+        <article id="article-card-1" class="product-card col-xl-4">
+            <img class="product-img" id="img-art-1" src="">
+            <div class="product-description d-flex justify-content-between">
+                <h2 id="name-art-1" class="product-name"></h2>
                 <p id="price-art-1" class="product-price"></p>
             </div>
         </article>
-        <article id="article-card-2" class="card">
+        <article id="article-card-2" class="product-card col-xl-4">
             <img class="product-img" id="img-art-2" src="">
-            <div class="product-description card-body .d-inline-flex">
-                <h2 class="product-name"></h2>
-                <p class="product-price"></p>
+            <div class="product-description d-flex justify-content-between">
+                <h2 id="name-art-2" class="product-name"></h2>
+                <p id="price-art-2" class="product-price"></p>
             </div>
         </article>
-        <article id="article-card-3" class="card">
+        <article id="article-card-3" class="product-card col-xl-4">
             <img class="product-img" id="img-art-3" src="">
-            <div class="product-description card-body .d-inline-flex">
-                <h2 class="product-name"></h2>
-                <p class="product-price"></p>
+            <div class="product-description d-flex justify-content-between">
+                <h2 id="name-art-3" class="product-name"></h2>
+                <p id="price-art-3" class="product-price"></p>
             </div>
         </article>
-        <article id="article-card-4" class="card">
+        <article id="article-card-4" class="product-card col-xl-4">
             <img class="product-img" id="img-art-4" src="">
-            <div class="product-description card-body .d-inline-flex">
-                <h2 class="product-name"></h2>
-                <p class="product-price"></p>
-            </div>
-        </article>
-        <article id="article-card-5" class="card">
-            <img class="product-img" id="img-art-5" src="">
-            <div class="product-description card-body .d-inline-flex">
-                <h2 class="product-name"></h2>
-                <p class="product-price"></p>
+            <div class="product-description d-flex justify-content-between">
+                <h2 id="name-art-4" class="product-name"></h2>
+                <p id="price-art-4" class="product-price"></p>
             </div>
         </article>
     </main >
 </div>
 
-    <footer class="text-center mt-auto w-100 bg-dark ">yo</footer>
+    <footer class="d-flex page-footer text-center mt-auto w-100 bg-dark footer-grid ">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+          </div>
+    </footer>
 </body>
 </html>
 
