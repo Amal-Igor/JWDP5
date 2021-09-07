@@ -25,11 +25,19 @@ getProductName = getJsonData
 getProductPrice = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`price-art-${i}`).innerText = data[i].price + '€'}}
+        document.getElementById(`price-art-${i}`).innerText = data[i].price + ' €'}}
     )
 
     .catch(error => console.log("Erreur" + error))
 
+    /*Description des produits*/
+getProductDescription = getJsonData
+    .then(data => {
+        for(let i =  0;  i < 5; i++) {  
+        document.getElementById(`box-description-${i}`).innerHTML = '<strong>Description: </strong>' + data[i].description}}
+    )
+
+    .catch(error => console.log("Erreur" + error))
 
     
 

@@ -1,3 +1,8 @@
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+
+
 *{
     box-sizing: border-box;
     max-width: 1920px;
@@ -5,11 +10,8 @@
 
 body{
     height: auto;
-
-
     display: grid;
     grid-template-areas: "header" 
-                        "banner" 
                         "content-grid"
                         "footer";
                             
@@ -32,16 +34,65 @@ body{
     grid-area: footer;
 }
 
+
+/*HEAD*/
 header{
     height: 5em;
+}
+
+#logo{
+    font-family: 'Paytone One', sans-serif;
+    font-size: 40px;
+    color: white;
+    position: relative;
+    left: 5%;
+}
+
+
+/*
+#logo::before{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f07a";
+    font-weight: 900;
+    font-size: 38px;
+    position: relative;
+    right: 10px;
+    color: linear-gradient(to right bottom, #e58a09, #ec7c37, #ea7353, #e16e6a, #d26e7c, #cf6986, #ca6591, #c2639c, #c45baf, #be55c6, #af55e1, #8f5bfe);
+}
+*/
+/*Panier*/
+.basket{
+    position: relative;
+    margin: 0 20px;
+}
+
+.basket::before{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f07a";
+    font-weight: 900 ;
+    position: relative;
+    right: 5px;
+}
+
+.our-products{
+    position: relative;
+}
+
+.our-products::before{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f030";
+    font-weight: 900 ;
+    position: relative;
+    right: 5px;
 }
 
 /*Bannière du site*/
 .banner{
     height: 10rem;
-    background-color: #70767c4f;
+    background-color: #0f0f0f26;
   
 }
+
 
 /*Main*/
 main{
@@ -60,10 +111,34 @@ main{
 /*Produits*/
 .product-name{
     font-size: 19px;
+    grid-area: name;
+    justify-self: start;
+    padding: 0 .45em;
 }
 
+.product-price{
+    font-weight: bold;
+    grid-area: price;
+    justify-self: end;
+    padding: 0 .45em;
+}
+
+
 .product-description{
-    padding: 0.5em .3em;
+
+    display: grid;
+    grid-template-areas: 'name price' 'box-description box-description' 'product-info add-to-basket';
+    align-items: baseline;
+    margin-top: inherit;
+    position: relative;
+    height: 100px;
+}
+
+.box-description{
+    grid-area: box-description;
+    text-align: justify;
+    padding: 0.45em;
+    font-size: 13px;
 }
 
 #article-card-0, #article-card-1, #article-card-2, #article-card-3, #article-card-4 {
@@ -74,5 +149,41 @@ main{
     border-radius: 25px 25px 0 0;
     max-width: 30%;
     border: 5px double rgba(35,34,34,0.18);
+    height: 22em;
 }
+
+.product-info{
+    grid-area: product-info;
+}
+
+.add-to-basket{
+    grid-area: add-to-basket;
+}
+
+
+/*
+.box-description{
+    position: absolute;
+    bottom: 24%;
+    color: white;
+    width: 100%;
+    background: #110f0f9e;
+    border-radius: 18px 18px 0 0;
+    overflow: hidden;
+    font-size: 14px;
+    padding: .45em .3em 0 .3em;
+    height: 0;
+    transition: height 450ms, visibility 250ms;
+    visibility: hidden;
+    text-align: justify;
+}
+
+.product-card:hover .box-description{
+    height: 7em;
+    transition: height 650ms;
+    visibility: visible;
+}
+*/
+
+
 
