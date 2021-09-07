@@ -3,7 +3,37 @@
 const getJsonData = fetch('http://localhost:3000/api/cameras').then(response => response.json());
 
 
-    /*Image Produits*/
+
+
+
+
+getJsonData
+.then(function getProducts() {
+    const products = getProducts;
+    for (let product in products) {
+        let productCard = document.createElement("div");
+        document.querySelector(".products").appendChild(productCard);
+        productCard.classList.add("product");
+}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    /*Image Produits
 getImgUrl = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
@@ -12,7 +42,7 @@ getImgUrl = getJsonData
 
     .catch(error => console.log("Erreur" + error))
 
-    /*Nom Produits*/
+    /*Nom Produits
 getProductName = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
@@ -21,7 +51,7 @@ getProductName = getJsonData
 
     .catch(error => console.log("Erreur" + error))
 
-    /*Prix Produits*/
+    /*Prix Produits
 getProductPrice = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
@@ -30,7 +60,7 @@ getProductPrice = getJsonData
 
     .catch(error => console.log("Erreur" + error))
 
-    /*Description des produits*/
+    /*Description des produits
 getProductDescription = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
@@ -40,6 +70,34 @@ getProductDescription = getJsonData
     .catch(error => console.log("Erreur" + error))
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*ZONNNNNEEE CRASH TEST*/
 /*Fiche produits*/
 
 /*
@@ -57,7 +115,7 @@ function getId(getArticle, getId) {
     }
 }
 */
-
+/*
  let e = 
     for(let i = 0 ; i < 5){
          document.querySelector(`[id^="article-card-${i}"]`).id = z
@@ -134,7 +192,3 @@ const yourObjectInResponse = [
 */
 
  
-
-   
-    
-    

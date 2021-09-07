@@ -152,12 +152,41 @@ main{
     height: 22em;
 }
 
+
+/*Boutons prod*/
+
+.product-button {
+    height: 1.7em;
+    width: 90%;
+    justify-self: center;
+    margin-top: 0.6em;
+    border-radius: 7px;
+}
+
 .product-info{
     grid-area: product-info;
+    position: relative;
+}
+
+.product-info::after{
+    content:"\f00e";
+
+}
+
+.product-info::after, .add-to-basket::after{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 20px;
+    position: relative;
 }
 
 .add-to-basket{
     grid-area: add-to-basket;
+    position: relative;
+}
+
+.add-to-basket::after{
+    content: "\f218";
 }
 
 
@@ -184,6 +213,4 @@ main{
     visibility: visible;
 }
 */
-
-
 
