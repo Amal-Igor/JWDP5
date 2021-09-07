@@ -39,7 +39,65 @@ getProductDescription = getJsonData
 
     .catch(error => console.log("Erreur" + error))
 
+
+/*Fiche produits*/
+
+/*
+let generateProductSheet = document.getElementsByClassName("product-card")
+
+/*
+let getId = generateProductSheet.getAttribute("id")
+
+let resultat = console.log(getId)
+
+function getId(getArticle, getId) {
+    let getArticle = document.getElementsByClassName("product-card");
+    for(let i = 0; {
+
+    }
+}
+*/
+
+ let e = 
+    for(let i = 0 ; i < 5){
+         document.querySelector(`[id^="article-card-${i}"]`).id = z
+ }
+/*
+var inputs = document.getElementsByClassName("product-card");
+for (var i = 0; i < inputs.length; i++) {
+  console.log(inputs[i].id);
+}
+*/
+
+
+
+
+/*
+let e = document.getElementsByClassName("product-card")[0].id;
+
+let f = Object.values(e)
     
+
+
+
+/*
+let generateProductSheet = document.getElementsByClassName("product-card")
+        console.log(generateProductSheet)
+
+function getId() {
+
+}
+
+/*
+
+    generateProductSheet.getAttribute('id')
+    generateProductSheet.id;
+
+
+
+
+
+
 
 
 
