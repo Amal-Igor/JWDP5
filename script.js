@@ -1,11 +1,6 @@
+/*
 
-/*Card Produits*/
 const getJsonData = fetch('http://localhost:3000/api/cameras').then(response => response.json());
-
-
-
-
-
 
 getJsonData
 .then(function getProducts() {
@@ -17,8 +12,46 @@ getJsonData
 }}
 
 
+*/
+main();
+
+function main(){
+const getJsonData = fetch('http://localhost:3000/api/cameras').then(response => response.json());
+
+let x = getJsonData
+        .then(function (dispatchData){
+            const products = dispatchData;
+
+            for (let item in products){
 
 
+                let getPrincipalContainer = document.getElementById("products");
+                let createCard = document.createElement("a")
+                createCard.href = `product.html?id=${dispatchData[item]._id}`;
+                createCard.className = 'card';
+                getPrincipalContainer.append(createCard)
+
+                let generatingImg = document.querySelector(".card") 
+                let createImg = document.createElement("img")
+                createImg.className = "card-img-top";
+                createImg.src = dispatchData[item].imageUrl
+                generatingImg.append(createImg)
+
+                let generateName = document.querySelector(".card")
+                let createName = document.createElement("h2")
+                createName.className = "card-title"
+                createName.innerText = dispatchData[item].name
+                generateName.append(createName)
+
+                let generatePrice = document.querySelector(".card")
+                let createPrice = document.createElement("p")
+                createPrice.className = "product-price"
+                createPrice.innerText = dispatchData[item].price
+                generatePrice.append(createPrice)
+            } 
+        
+        })
+}
 
 
 
@@ -46,16 +79,16 @@ getImgUrl = getJsonData
 getProductName = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`name-art-${i}`).innerText = data[i].name}}
+        document.getElementById(`name-art-${i}`).innerTegetPrincipalContainert = data[i].name}}
         )
 
     .catch(error => console.log("Erreur" + error))
 
-    /*Prix Produits
+    /*PrigetPrincipalContainer Produits
 getProductPrice = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`price-art-${i}`).innerText = data[i].price + ' €'}}
+        document.getElementById(`price-art-${i}`).innerTegetPrincipalContainert = data[i].price + ' €'}}
     )
 
     .catch(error => console.log("Erreur" + error))
@@ -64,7 +97,7 @@ getProductPrice = getJsonData
 getProductDescription = getJsonData
     .then(data => {
         for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`box-description-${i}`).innerHTML = '<strong>Description: </strong>' + data[i].description}}
+        document.getElementById(`bogetPrincipalContainer-description-${i}`).innerHTML = '<strong>Description: </strong>' + data[i].description}}
     )
 
     .catch(error => console.log("Erreur" + error))
