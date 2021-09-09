@@ -14,7 +14,7 @@ getJsonData
                 let getPrincipalContainer = document.getElementById("products");
                 let createCard = document.createElement("div")
                 createCard.className = 'product-card';
-                createCard.classList.add("col");
+                createCard.classList.add("col", "pl-0", "pr-0");
                 
                 getPrincipalContainer.appendChild(createCard)
 
@@ -22,23 +22,25 @@ getJsonData
                 /*Implémentation de l'img*/
                  
                 let createImg = document.createElement("img")
-                createImg.className = "card-img-top";
+                createImg.className = "card-img";
                 createImg.src = dispatchData[item].imageUrl
                 createCard.appendChild(createImg)
 
                 /*Implémentation du Nom*/
 
                 let createName = document.createElement("h2")
-                createName.className = "card-title"
+                createName.className = "card-name"
                 createName.innerText = dispatchData[item].name
                 createCard.appendChild(createName)
+                createName.classList.add("card-description");
 
                 /*Implémentation du prix*/
 
                 let createPrice = document.createElement("p")
-                createPrice.className = "product-price"
-                createPrice.innerText = dispatchData[item].price
+                createPrice.className = "product-price" 
+                createPrice.innerHTML = dispatchData[item].price / 100 .toFixed(2) + '<strong> € </strong>'
                 createCard.appendChild(createPrice)
+                createPrice.classList.add("card-description");
 
                 /*Lien  vers la fiche produit*/
 
@@ -47,10 +49,25 @@ getJsonData
                 createLink.innerText = "Voir la fiche produit"
                 createLink.href = `product-sheet.html?id=${dispatchData[item]._id}`
                 createCard.appendChild(createLink)
+                createLink.classList.add("card-button");
+
+                /*Ajouter au panier*/
+
+                let createBasket = document.createElement("button")
+                createBasket.className = "to-basket"
+                createCard.appendChild(createBasket);
+                createBasket.innerText = "Ajouter au panier"
+                createBasket.classList.add("card-button")
+                
             } 
         
         })
 }
+
+
+
+
+
 
 
 
