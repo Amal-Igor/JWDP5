@@ -1,106 +1,57 @@
-/*
 
+getIndexGenerated();
+
+function getIndexGenerated(){
 const getJsonData = fetch('http://localhost:3000/api/cameras').then(response => response.json());
 
 getJsonData
-.then(function getProducts() {
-    const products = getProducts;
-    for (let product in products) {
-        let productCard = document.createElement("div");
-        document.querySelector(".products").appendChild(productCard);
-        productCard.classList.add("product");
-}}
-
-
-*/
-main();
-
-function main(){
-const getJsonData = fetch('http://localhost:3000/api/cameras').then(response => response.json());
-
-let x = getJsonData
         .then(function (dispatchData){
             const products = dispatchData;
 
             for (let item in products){
 
-
+                /*Implémentation de la carte*/
                 let getPrincipalContainer = document.getElementById("products");
-                let createCard = document.createElement("a")
-                createCard.href = `product.html?id=${dispatchData[item]._id}`;
-                createCard.className = 'card';
-                getPrincipalContainer.append(createCard)
+                let createCard = document.createElement("div")
+                createCard.className = 'product-card';
+                createCard.classList.add("col");
+                
+                getPrincipalContainer.appendChild(createCard)
 
-                let generatingImg = document.querySelector(".card") 
+
+                /*Implémentation de l'img*/
+                 
                 let createImg = document.createElement("img")
                 createImg.className = "card-img-top";
                 createImg.src = dispatchData[item].imageUrl
-                generatingImg.append(createImg)
+                createCard.appendChild(createImg)
 
-                let generateName = document.querySelector(".card")
+                /*Implémentation du Nom*/
+
                 let createName = document.createElement("h2")
                 createName.className = "card-title"
                 createName.innerText = dispatchData[item].name
-                generateName.append(createName)
+                createCard.appendChild(createName)
 
-                let generatePrice = document.querySelector(".card")
+                /*Implémentation du prix*/
+
                 let createPrice = document.createElement("p")
                 createPrice.className = "product-price"
                 createPrice.innerText = dispatchData[item].price
-                generatePrice.append(createPrice)
+                createCard.appendChild(createPrice)
+
+                /*Lien  vers la fiche produit*/
+
+                let createLink = document.createElement("a")
+                createLink.className = "product-sheet-link"
+                createLink.innerText = "Voir la fiche produit"
+                createLink.href = `product-sheet.html?id=${dispatchData[item]._id}`
+                createCard.appendChild(createLink)
             } 
         
         })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    /*Image Produits
-getImgUrl = getJsonData
-    .then(data => {
-        for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`img-art-${i}`).src = data[i].imageUrl}}
-        )
-
-    .catch(error => console.log("Erreur" + error))
-
-    /*Nom Produits
-getProductName = getJsonData
-    .then(data => {
-        for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`name-art-${i}`).innerTegetPrincipalContainert = data[i].name}}
-        )
-
-    .catch(error => console.log("Erreur" + error))
-
-    /*PrigetPrincipalContainer Produits
-getProductPrice = getJsonData
-    .then(data => {
-        for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`price-art-${i}`).innerTegetPrincipalContainert = data[i].price + ' €'}}
-    )
-
-    .catch(error => console.log("Erreur" + error))
-
-    /*Description des produits
-getProductDescription = getJsonData
-    .then(data => {
-        for(let i =  0;  i < 5; i++) {  
-        document.getElementById(`bogetPrincipalContainer-description-${i}`).innerHTML = '<strong>Description: </strong>' + data[i].description}}
-    )
-
-    .catch(error => console.log("Erreur" + error))
 
 
 

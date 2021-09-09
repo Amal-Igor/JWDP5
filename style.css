@@ -17,25 +17,9 @@ body{
                             
 }
 
-/*Body Grid-Layout*/
-.header-grid{
-    grid-area: header;
-}
-
-.banner-grid{
-    grid-area: banner;
-}
-
-.content-grid{
-    grid-area: content-grid;
-}
-
-.footer-grid{
-    grid-area: footer;
-}
 
 
-/*HEAD*/
+/*HEADER*/
 header{
     height: 5em;
 }
@@ -49,24 +33,14 @@ header{
 }
 
 
-/*
-#logo::before{
-    font-family: 'Font Awesome 5 Free';
-    content: "\f07a";
-    font-weight: 900;
-    font-size: 38px;
-    position: relative;
-    right: 10px;
-    color: linear-gradient(to right bottom, #e58a09, #ec7c37, #ea7353, #e16e6a, #d26e7c, #cf6986, #ca6591, #c2639c, #c45baf, #be55c6, #af55e1, #8f5bfe);
-}
-*/
-/*Panier*/
-.basket{
+/*Nav link*/
+    /*Panier*/
+    .basket{
     position: relative;
     margin: 0 20px;
 }
 
-.basket::before{
+    .basket::before{
     font-family: 'Font Awesome 5 Free';
     content: "\f07a";
     font-weight: 900 ;
@@ -74,11 +48,11 @@ header{
     right: 5px;
 }
 
-.our-products{
+    .our-products{
     position: relative;
 }
 
-.our-products::before{
+    .our-products::before{
     font-family: 'Font Awesome 5 Free';
     content: "\f030";
     font-weight: 900 ;
@@ -86,29 +60,33 @@ header{
     right: 5px;
 }
 
-/*Bannière du site*/
-.banner{
-    height: 10rem;
-    background-color: #0f0f0f26;
-  
-}
 
 
-/*Main*/
-main{
-    width: 73%;
-    padding-top: 5em;
-    padding-bottom: 2em;
-}
 
 /*Taille des images produits*/
-.product-img{
+img{
     width: 100%;
-    height: 150px;
+    height: 50%;
     object-fit: cover;
+    padding: 0;
 }
 
 /*Produits*/
+#products{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    padding-top: 2em;
+    grid-gap: 10px;
+}
+
+.product-card{
+    border:solid;
+}
+
+
+
+/*
 .product-name{
     font-size: 19px;
     grid-area: name;
@@ -124,15 +102,6 @@ main{
 }
 
 
-.product-description{
-
-    display: grid;
-    grid-template-areas: 'name price' 'box-description box-description' 'product-info add-to-basket';
-    align-items: baseline;
-    margin-top: inherit;
-    position: relative;
-    height: 100px;
-}
 
 .box-description{
     grid-area: box-description;
@@ -155,6 +124,8 @@ main{
 
 /*Boutons prod*/
 
+
+/*
 .product-button {
     height: 1.7em;
     width: 90%;
