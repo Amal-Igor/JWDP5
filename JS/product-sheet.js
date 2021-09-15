@@ -1,6 +1,6 @@
 
 
-
+/*
 const getJsonData = fetch('http://localhost:3000/api/cameras')
 .then(response => response.json())
 .then (getId => {
@@ -16,49 +16,80 @@ const getJsonData = fetch('http://localhost:3000/api/cameras')
         if (n = jsonId) {
             console.log(getJsonData.id[n])
         }
-        return 
+       
 }
 })
 
-
+*/
 
 
     
+(async function() {
+    const articleId =  getArticleId()
 
-/*
-
-function generateProductSheet(){
-    return new Promise((generateCustomInfos, showErrorMessage) => {
-        let getHref = window.location.href
-        let n = getHref.substring(getHref.indexOf('id=') + 3)
-        const getJsonData = fetch('http://localhost:3000/api/cameras')
-        .then(response => response.json())
-        .then (data => {
-        getJsonData.id = console.log(data[0])
-    })
-        if ()
-    })
-} 
-            
-*/
+    const article = await getJsonData(articleId)
+    console.log(article)
+    
+    hydrateArticle (article)
 
 
+}) ()
+
+function getArticleId() {
+   return new URL (location.href).searchParams.get("id")
+}
+
+function getJsonData(articleId) {
+    return fetch(`http://localhost:3000/api/cameras/${articleId}`)
+                .then(response => response.json())
+                .then(articles => articles)
+}
+
+function hydrateArticle(article) {
+
+     /*Implémentation de la carte produit*/
+    const getPrincipalContainer = document.getElementById("main")
+    const createContainer = document.createElement("div")
+    createContainer.classList.add("sub-container")
+    getPrincipalContainer.appendChild(createContainer)
 
 
-/*
-let getHref = window.location.href
-
-let n = getHref.substring(getHref.indexOf('id=') + 3)
-
-
-
-
-/*
-let isolateId = getHref.match(regex);
-*/
-
-/*
-let getId = getHref.filter(id => /^[^id=]/.test(fruit))
+    /*Implémentation de l'img*/
+    const createImgContainer = document.createElement("img")
+    createImgContainer.classList.add("product-img")
+    createContainer.appendChild(createImgContainer)
+    
+    createImgContainer.src = article.imageUrl
 
 
-let matches = location.href.match(/5be1ed3f1c9d44000030b061/);  */
+    /*Implémentation du Nom*/
+    const createNameField = document.createElement("div")
+    createNameField.classList.add("product-name", "product-sheet-infos")
+    createContainer.appendChild(createNameField)
+
+    createNameField.innerText = article.name
+
+    /*Implémentation du prix*/
+    const createPriceField = document.createElement("div")
+    createPriceField.classList.add("product-price", "product-sheet-infos")
+    createContainer.appendChild(createPriceField)
+
+    createPriceField.innerHTML = article.price / 100 .toFixed(2) + '<strong> € </strong>'
+
+    /*Description*/
+    const createDescriptionField = document.createElement("div")
+    createDescriptionField.classList.add("product-description", "product-sheet-infos")
+    createContainer.appendChild(createDescriptionField)
+
+    createDescriptionField.innerHTML = article.description
+
+    /*Option*/
+    const createOptionField = document.createElement("select")
+    createOptionField.classList.add("product-options", "product-sheet-infos")
+    createContainer.appendChild(createOptionField)
+
+
+
+
+
+}

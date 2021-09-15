@@ -8,7 +8,7 @@ getJsonData
         .then(function (dispatchData){
             const products = dispatchData;
 
-            for (let item in products){
+            for (let item in products)  {
 
                 /*Implémentation de la carte*/
                 let getPrincipalContainer = document.getElementById("products");
