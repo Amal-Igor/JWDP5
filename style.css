@@ -174,102 +174,10 @@ color: white;
 .to-basket{
     grid-area: to-basket-button
 }
-/*
-.product-name{
-    font-size: 19px;
-    grid-area: name;
-    justify-self: start;
-    padding: 0 .45em;
-}
-
-.product-price{
-    font-weight: bold;
-    grid-area: price;
-    justify-self: end;
-    padding: 0 .45em;
-}
 
 
 
-.box-description{
-    grid-area: box-description;
-    text-align: justify;
-    padding: 0.45em;
-    font-size: 13px;
-}
-
-#article-card-0, #article-card-1, #article-card-2, #article-card-3, #article-card-4 {
-    overflow: hidden;
-    padding-right: 0;
-    padding-left: 0;
-    margin: 10px 3px;
-    border-radius: 25px 25px 0 0;
-    max-width: 30%;
-    border: 5px double rgba(35,34,34,0.18);
-    height: 22em;
-}
 
 
-/*Boutons prod*/
 
-
-/*
-.product-button {
-    height: 1.7em;
-    width: 90%;
-    justify-self: center;
-    margin-top: 0.6em;
-    border-radius: 7px;
-}
-
-.product-info{
-    grid-area: product-info;
-    position: relative;
-}
-
-.product-info::after{
-    content:"\f00e";
-
-}
-
-.product-info::after, .add-to-basket::after{
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    font-size: 20px;
-    position: relative;
-}
-
-.add-to-basket{
-    grid-area: add-to-basket;
-    position: relative;
-}
-
-.add-to-basket::after{
-    content: "\f218";
-}
-
-
-/*
-.box-description{
-    position: absolute;
-    bottom: 24%;
-    color: white;
-    width: 100%;
-    background: #110f0f9e;
-    border-radius: 18px 18px 0 0;
-    overflow: hidden;
-    font-size: 14px;
-    padding: .45em .3em 0 .3em;
-    height: 0;
-    transition: height 450ms, visibility 250ms;
-    visibility: hidden;
-    text-align: justify;
-}
-
-.product-card:hover .box-description{
-    height: 7em;
-    transition: height 650ms;
-    visibility: visible;
-}
-*/
 
