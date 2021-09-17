@@ -46,7 +46,7 @@ getJsonData
 
                 let createLink = document.createElement("a")
                 createLink.className = "product-sheet-link"
-                createLink.innerText = "Voir la fiche produit"
+                createLink.innerHTML = '<i class="fas fa-search"></i>'
                 createLink.href = `product-sheet.html?id=${dispatchData[item]._id}`
                 createCard.appendChild(createLink)
                 createLink.classList.add("card-button");
@@ -56,7 +56,7 @@ getJsonData
                 let createBasket = document.createElement("button")
                 createBasket.className = "to-basket"
                 createCard.appendChild(createBasket);
-                createBasket.innerText = "Ajouter au panier"
+                createBasket.innerHTML = '<i class="fas fa-cart-arrow-down"></i>'
                 createBasket.classList.add("card-button")
                 
             } 

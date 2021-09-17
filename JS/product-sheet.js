@@ -28,8 +28,7 @@ const getJsonData = fetch('http://localhost:3000/api/cameras')
     const articleId =  getArticleId()
 
     const article = await getJsonData(articleId)
-    console.log(article)
-    
+
     hydrateArticle (article)
 
 
@@ -64,32 +63,85 @@ function hydrateArticle(article) {
 
     /*Implémentation du Nom*/
     const createNameField = document.createElement("div")
-    createNameField.classList.add("product-name", "product-sheet-infos")
+    createNameField.classList.add("product-name", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createNameField)
 
-    createNameField.innerText = article.name
+    createNameField.innerHTML = '<strong>Nom du produit : </strong>' + article.name
 
     /*Implémentation du prix*/
     const createPriceField = document.createElement("div")
-    createPriceField.classList.add("product-price", "product-sheet-infos")
+    createPriceField.classList.add("product-price", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createPriceField)
 
-    createPriceField.innerHTML = article.price / 100 .toFixed(2) + '<strong> € </strong>'
+    createPriceField.innerHTML = '<strong>Prix : </strong>' + article.price / 100 .toFixed(2) + '<strong> € </strong>'
 
     /*Description*/
     const createDescriptionField = document.createElement("div")
-    createDescriptionField.classList.add("product-description", "product-sheet-infos")
+    createDescriptionField.classList.add("product-description", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createDescriptionField)
 
-    createDescriptionField.innerHTML = article.description
+    createDescriptionField.innerHTML = '<strong>Description :</strong>' + article.description
+
+    /*Ajout du bouton Ajouter au panier*/
+    const createBasketButton = document.createElement("button")
+    createBasketButton.classList.add("product-sheet__button")
+    createBasketButton.innerHTML = "Ajouter au panier"
+    createContainer.appendChild(createBasketButton)
+
 
     /*Option*/
+    //Creating Select
     const createOptionField = document.createElement("select")
-    createOptionField.classList.add("product-options", "product-sheet-infos")
+    createOptionField.id = 'select-options'
+    createOptionField.classList.add("product-options")
     createContainer.appendChild(createOptionField)
 
+    //Getting to options
+    const getSelect = document.getElementById("select-options")
 
+    //Labelling Dropdown Button
+    const labelSelect = document.createElement("label")
+    labelSelect.id = "options-label"
+    labelSelect.classList.add("label-select", "infos-padding")
+    labelSelect.innerHTML = "<strong> Type d'objectif : </strong>"
+    createContainer.appendChild(labelSelect)
 
+    const jsonOptions = article.lenses
+    loadFromJson(getSelect,jsonOptions)
 
-
+        function loadFromJson(el,json){
+        // appending options from json 
+            json.forEach(each=>{
+            let newEl = document.createElement("option")
+            newEl.innerText = each
+            newEl.value = each
+            el.appendChild(newEl)
+            })
 }
+}
+ 
+
+/*
+//Generating Option
+const createOption = document.createElement('option')
+createOption.value = "default"
+createOptionField.appendChild(createOption)
+
+//Fill options with JSON array
+const select = document.getElementById("select-options")
+const options = article.lenses
+for(var i=0; i < options.lenght; i++)
+        {   
+            
+            var option = document.createElement("Option"),
+                inner = document.createTextNode(options[i])
+
+                option.appendChild(inner);
+
+            select.insertBefore(option,select.lastChild)
+
+            
+        }
+
+        */
+       
