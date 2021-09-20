@@ -24,24 +24,33 @@ const getJsonData = fetch('http://localhost:3000/api/cameras')
 
 
     
-(async function() {
+(async function () {
     const articleId =  getArticleId()
 
     const article = await getJsonData(articleId)
 
-    hydrateArticle (article)
+
+    await hydrateArticle (article)
+
+    /*await getOption()*/
+
+    addEventonButton()
 
 
 }) ()
 
+
 function getArticleId() {
    return new URL (location.href).searchParams.get("id")
+
+   
 }
 
 function getJsonData(articleId) {
     return fetch(`http://localhost:3000/api/cameras/${articleId}`)
                 .then(response => response.json())
                 .then(articles => articles)
+                
 }
 
 function hydrateArticle(article) {
@@ -82,9 +91,12 @@ function hydrateArticle(article) {
 
     createDescriptionField.innerHTML = '<strong>Description :</strong>' + article.description
 
+ 
+
     /*Ajout du bouton Ajouter au panier*/
     const createBasketButton = document.createElement("button")
     createBasketButton.classList.add("product-sheet__button")
+    createBasketButton.setAttribute("id", "submit-button")
     createBasketButton.innerHTML = "Ajouter au panier"
     createContainer.appendChild(createBasketButton)
 
@@ -92,9 +104,15 @@ function hydrateArticle(article) {
     /*Option*/
     //Creating Select
     const createOptionField = document.createElement("select")
-    createOptionField.id = 'select-options'
+    createOptionField.setAttribute('id', 'select-options')
     createOptionField.classList.add("product-options")
     createContainer.appendChild(createOptionField)
+
+    //Retour objet
+    
+    
+
+    
 
     //Getting to options
     const getSelect = document.getElementById("select-options")
@@ -118,7 +136,83 @@ function hydrateArticle(article) {
             el.appendChild(newEl)
             })
 }
+
+
+//Récupérer les élements pour le panier 
+
+const reachUserOption = document.querySelector("#select-options");
+    const optionChoice = reachUserOption.value
+    console.log (optionChoice)
+
+let z = {
+    nom: article.name,
+    prix: article.price,
+    id: article._id,
+    option: optionChoice,
 }
+
+console.log(z)
+
+
+    
+    
+
+
+}
+
+
+
+
+
+
+    //write your code here
+
+
+
+
+
+function addEventonButton(){
+    const reachSubmitButton = document.querySelector("#submit-button");
+    console.log(reachSubmitButton)
+    reachSubmitButton.addEventListener("click", (event)=>{
+        event.preventDefault();
+
+      
+    })
+
+    
+}
+
+
+/*
+   let getUsersChoices = {
+        id: getArticleId(URL),
+        nom: .name,
+        prix: getArticleId(URL).price / 100
+    }
+
+
+*/
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
  
 
 /*
