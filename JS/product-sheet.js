@@ -34,8 +34,6 @@ const getJsonData = fetch('http://localhost:3000/api/cameras')
 
     /*await getOption()*/
 
-    addEventonButton()
-
 
 }) ()
 
@@ -97,6 +95,7 @@ function hydrateArticle(article) {
     const createBasketButton = document.createElement("button")
     createBasketButton.classList.add("product-sheet__button")
     createBasketButton.setAttribute("id", "submit-button")
+    createBasketButton.type = "submit"
     createBasketButton.innerHTML = "Ajouter au panier"
     createContainer.appendChild(createBasketButton)
 
@@ -107,12 +106,6 @@ function hydrateArticle(article) {
     createOptionField.setAttribute('id', 'select-options')
     createOptionField.classList.add("product-options")
     createContainer.appendChild(createOptionField)
-
-    //Retour objet
-    
-    
-
-    
 
     //Getting to options
     const getSelect = document.getElementById("select-options")
@@ -139,60 +132,59 @@ function hydrateArticle(article) {
 
 
 //Récupérer les élements pour le panier 
+fillShoppingCart();
 
-const reachUserOption = document.querySelector("#select-options");
-    const optionChoice = reachUserOption.value
-    console.log (optionChoice)
-
-let z = {
-    nom: article.name,
-    prix: article.price,
-    id: article._id,
-    option: optionChoice,
-}
-
-console.log(z)
-
-
-    
-    
-
-
-}
-
-
-
-
-
-
-    //write your code here
-
-
-
-
-
-function addEventonButton(){
+function fillShoppingCart(){
     const reachSubmitButton = document.querySelector("#submit-button");
     console.log(reachSubmitButton)
     reachSubmitButton.addEventListener("click", (event)=>{
         event.preventDefault();
 
-      
-    })
 
+        const reachUserOption = document.querySelector("#select-options");
+        const optionChoice = reachUserOption.value
+
+        let userChoice = {
+            nom: article.name,
+            prix: article.price / 100,
+            id: article._id,
+            option: optionChoice,
+            }
+            
+            console.log(userChoice)
+
+
+            //----Local Storage ----//
+        let productLocalStorage = JSON.parse(localStorage.getItem("product"));
+
+        if (productLocalStorage) {
+            productLocalStorage.push(userChoice);
+            localStorage.setItem("product", JSON.stringify(productLocalStorage));
+
+            console.log(productLocalStorage)  
+
+
+        } else {
+            productLocalStorage = [];
+            productLocalStorage.push(userChoice);
+            localStorage.setItem("product", JSON.stringify(productLocalStorage));
+
+            console.log(productLocalStorage)  
+        }
+    });
     
+    
+    
+}   
+
+
 }
 
 
-/*
-   let getUsersChoices = {
-        id: getArticleId(URL),
-        nom: .name,
-        prix: getArticleId(URL).price / 100
-    }
 
 
-*/
+
+
 
 
 
