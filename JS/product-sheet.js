@@ -135,6 +135,7 @@ function hydrateArticle(article) {
 fillShoppingCart();
 
 function fillShoppingCart(){
+    //Sélection du bouton ajouter au panier
     const reachSubmitButton = document.querySelector("#submit-button");
     console.log(reachSubmitButton)
     reachSubmitButton.addEventListener("click", (event)=>{
@@ -144,6 +145,7 @@ function fillShoppingCart(){
         const reachUserOption = document.querySelector("#select-options");
         const optionChoice = reachUserOption.value
 
+        //Initialisation Objet panier Client
         let userChoice = {
             nom: article.name,
             prix: article.price / 100,
@@ -154,13 +156,28 @@ function fillShoppingCart(){
             console.log(userChoice)
 
 
-            //----Local Storage ----//
+            //----------Local Storage ------------//
+
+
+        //Récupération des données pour les convertir en JSON
         let productLocalStorage = JSON.parse(localStorage.getItem("product"));
 
+        //Génération Popup confirmation des achats
+        const confirmPopUp = () => {
+            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyer sur OK pour aller au panier`)) {
+                window.location.href = "cart.html"
+                
+            } else {
+                window.location.href = "index.html"
+            }
+        }
+
+        //Stockage des données dans le local storage
         if (productLocalStorage) {
             productLocalStorage.push(userChoice);
             localStorage.setItem("product", JSON.stringify(productLocalStorage));
 
+            confirmPopUp();
             console.log(productLocalStorage)  
 
 
@@ -169,6 +186,7 @@ function fillShoppingCart(){
             productLocalStorage.push(userChoice);
             localStorage.setItem("product", JSON.stringify(productLocalStorage));
 
+            confirmPopUp();
             console.log(productLocalStorage)  
         }
     });
