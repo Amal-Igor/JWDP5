@@ -37,28 +37,28 @@ else {
         `;
     }
         if(x == productLocalStorage.length){
-        //Ajout des cases montant total + supprimer tout le panier
-        reachMainContainer.innerHTML = hydrateCart + 
-        `<div class="row container-fluid justify-content-center text-center">
-            <div class="total-amount col">"Montant total du panier" +  </div>
-            <div class="order col">yo</div>
-        </div>`;
-
-
-        ///Calcul du prix total du panier
-      /*  let calculPrice = [];
-        for (productLocalStorage of productLocalStorage) {
-        let article = productLocalStorage.prix;
+            ///Calcul du prix total du panier
+        let calculPrice = [];
+        for (let montant of productLocalStorage) {
+        let article = montant.prix;
         calculPrice.push(article);
         };
         
+        /*
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         const totalPrice = calculPrice.reduce(reducer, 0);
-
-        console.log(totalPrice);
-      */
+        */
 
         
+        const totalPrice = productLocalStorage.map(montant => montant.prix).reduce((a, b) => a + b, 0)
+        console.log(totalPrice);
+
+        //Ajout des cases montant total + supprimer tout le panier
+        reachMainContainer.innerHTML = hydrateCart + 
+        `<div class="row container-fluid justify-content-center text-center">
+            <div class="total-amount col">Prix total : ${totalPrice} €</div>
+            <div class="order col">yo</div>
+        </div>`;
         }    
 }
 
@@ -73,6 +73,7 @@ let reachDeleteButton = document.querySelectorAll(".product-delete");
           reachDeleteButton[i].addEventListener("click", (event) => {
               event.preventDefault();
                 //Récupération de l'index du produit associé au bouton supprimer
+                console.log(productLocalStorage)
                 
                 let getIndexOnLocalStorage = productLocalStorage.indexOf(productLocalStorage[i]);
                     console.log(getIndexOnLocalStorage);
