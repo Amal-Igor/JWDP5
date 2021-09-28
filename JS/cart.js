@@ -32,7 +32,7 @@ else {
             <div class="product-option cart-element col"> ${productLocalStorage[x].option}</div>
             <div class="product-quantity cart-element col">Quantité</div>
             <div class="product-price cart-element col">${productLocalStorage[x].prix} €</div>
-            <div class="product-deletecart-element col">Bouton Supprimer</div>
+            <button class="product-delete cart-element col">Bouton Supprimer</button>
         </div>`;
     }
         if(x == productLocalStorage.length){
@@ -41,7 +41,20 @@ else {
 
         }
 
-    
 
 
+
+        
 }
+
+
+let reachDeleteButton = document.querySelectorAll(".product-delete");
+
+for (let y = 0; y < reachDeleteButton[y].lenght; y++){
+    reachDeleteButton[y].addEventListener("click", (event) => {
+        event.preventDefault();
+
+        let getIdToDelete = productLocalStorage[y].id;
+        console.log(getIdToDelete);
+    })
+        }

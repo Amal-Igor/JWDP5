@@ -52,13 +52,13 @@ getJsonData
                 createLink.classList.add("card-button");
 
                 /*Ajouter au panier*/
-
+                /*
                 let createBasket = document.createElement("button")
                 createBasket.className = "to-basket"
                 createCard.appendChild(createBasket);
                 createBasket.innerHTML = '<i class="fas fa-cart-arrow-down"></i>'
                 createBasket.classList.add("card-button")
-                
+                */
             } 
         
         })
