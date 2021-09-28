@@ -1,17 +1,37 @@
 /*Fiche Produit*/
 .sub-container{
     display: grid;
-    grid-template-areas: 'img name name' 'img description description' 'img label option' 'img price price' 'img button button';
-    grid-template-columns: 70% 15% 15%;
+    grid-template-areas: 'img name-label name' 'img description-label description' 'img option-label option' 'img price-label price' 'img button button';
+    grid-template-columns: 60% 20% 20%;
     grid-template-rows: auto auto 2em auto auto;
-    border: 5px double #B8B8B8;
+    border: 8px double #B8B8B8;
+    justify-items: center;
     border-radius: 20px;
     overflow: hidden;
-    padding-bottom: 2em;
 }
 
 .product-img{
     grid-area: img;
+}
+
+.product-label {
+    align-self: center;
+}
+
+#options-label{
+    grid-area: option-label;
+}
+
+#product-label-0{
+    grid-area: name-label;
+}
+
+#product-label-1{
+    grid-area: description-label;
+}
+
+#product-label-2{
+    grid-area: price-label;
 }
 
 .product-name{
@@ -28,6 +48,7 @@
 
 .product-description{
     grid-area: description;
+    padding-left: 4px;
 }
 
 
@@ -43,8 +64,14 @@
 
 .product-sheet-infos{
     text-align: start;
-    padding-top: 4em;
+    align-self: center;
     position: relative;
+}
+
+.product-label {
+    justify-self: start;
+    padding-left: 1em;
+    font-weight: 600;
 }
 
 .label-select{
@@ -52,9 +79,6 @@
 }
 
 
-.infos-padding {
-    padding-left: 1em;
-}
 
 .product-sheet__button{
     grid-area: button;

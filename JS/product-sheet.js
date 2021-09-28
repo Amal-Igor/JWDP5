@@ -59,7 +59,6 @@ function hydrateArticle(article) {
     createContainer.classList.add("sub-container")
     getPrincipalContainer.appendChild(createContainer)
 
-
     /*Implémentation de l'img*/
     const createImgContainer = document.createElement("img")
     createImgContainer.classList.add("product-img")
@@ -73,21 +72,21 @@ function hydrateArticle(article) {
     createNameField.classList.add("product-name", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createNameField)
 
-    createNameField.innerHTML = '<strong>Nom du produit : </strong>' + article.name
+    createNameField.innerHTML = article.name
 
     /*Implémentation du prix*/
     const createPriceField = document.createElement("div")
     createPriceField.classList.add("product-price", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createPriceField)
 
-    createPriceField.innerHTML = '<strong>Prix : </strong>' + article.price / 100 .toFixed(2) + '<strong> € </strong>'
+    createPriceField.innerHTML = article.price / 100 .toFixed(2) + '<strong> € </strong>'
 
     /*Description*/
     const createDescriptionField = document.createElement("div")
     createDescriptionField.classList.add("product-description", "product-sheet-infos", "infos-padding")
     createContainer.appendChild(createDescriptionField)
 
-    createDescriptionField.innerHTML = '<strong>Description :</strong>' + article.description
+    createDescriptionField.innerHTML = article.description
 
  
 
@@ -104,7 +103,7 @@ function hydrateArticle(article) {
     //Creating Select
     const createOptionField = document.createElement("select")
     createOptionField.setAttribute('id', 'select-options')
-    createOptionField.classList.add("product-options")
+    createOptionField.classList.add("product-options" )
     createContainer.appendChild(createOptionField)
 
     //Getting to options
@@ -113,8 +112,7 @@ function hydrateArticle(article) {
     //Labelling Dropdown Button
     const labelSelect = document.createElement("label")
     labelSelect.id = "options-label"
-    labelSelect.classList.add("label-select", "infos-padding")
-    labelSelect.innerHTML = "<strong> Type d'objectif : </strong>"
+    labelSelect.classList.add("label-select", "product-label", "infos-padding", "option-label")
     createContainer.appendChild(labelSelect)
 
     const jsonOptions = article.lenses
@@ -128,6 +126,23 @@ function hydrateArticle(article) {
             newEl.value = each
             el.appendChild(newEl)
             })
+
+
+        //Création des labels pour fiche-produit
+            const getProductInfos = document.getElementsByClassName("product-sheet-infos")
+            for (s = 0; s < getProductInfos.length; s++) {
+                let getSubContainer = document.querySelector(".sub-container")
+                let createLabels = document.createElement("div")
+                createLabels.classList.add("product-label")
+                createLabels.setAttribute('id', `product-label-${s}`)
+                getSubContainer.appendChild(createLabels) 
+            }
+
+            //Contenu des labels de la fiche produit
+            document.querySelector("#product-label-0").innerText = " Nom du produit :";
+            document.querySelector("#product-label-1").innerText = " Description :";
+            document.querySelector("#options-label").innerText = " Choisissez vos options :";
+            document.querySelector("#product-label-2").innerText = " Prix :";
 }
 
 
@@ -162,20 +177,26 @@ function fillShoppingCart(){
         //Récupération des données pour les convertir en JSON
         let productLocalStorage = JSON.parse(localStorage.getItem("product"));
 
+        //Ajout des donénes dans le local storage
+        const addProductInLocalStorage = () => {
+            productLocalStorage.push(userChoice)
+            localStorage.setItem("product", JSON.stringify(productLocalStorage));
+        }
+
         //Génération Popup confirmation des achats
         const confirmPopUp = () => {
-            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyer sur OK pour aller au panier`)) {
+            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyer sur OK pour continuer vos achats`)) {
                 window.location.href = "cart.html"
                 
             } else {
-                window.location.href = "index.html"
+                window.location.href = ""
             }
         }
 
+
         //Stockage des données dans le local storage
         if (productLocalStorage) {
-            productLocalStorage.push(userChoice);
-            localStorage.setItem("product", JSON.stringify(productLocalStorage));
+            addProductInLocalStorage()
 
             confirmPopUp();
             console.log(productLocalStorage)  
@@ -183,8 +204,7 @@ function fillShoppingCart(){
 
         } else {
             productLocalStorage = [];
-            productLocalStorage.push(userChoice);
-            localStorage.setItem("product", JSON.stringify(productLocalStorage));
+            addProductInLocalStorage();
 
             confirmPopUp();
             console.log(productLocalStorage)  
