@@ -106,21 +106,21 @@ const goToForm = () => {
 
     const formScheme = `<form class="form-order">
     <label for="nom">Nom :</label>
-      <input class="input-entry" id="input-nom" name="nom" type="text" required>            
+      <input class="input-entry letter-input" id="input-nom" name="nom" type="text" required>            
     <label for="prenom">Prénom :</label>
-        <input class="input-entry" id="input-prenom" name="prenom" type="text" required>
+        <input class="input-entry letter-input" id="input-prenom" name="prenom" type="text" required>
     <label for="mail">Email :</label>
          <input class="input-entry" id="input-mail" name="mail" type="text" required>
     <label for="adresse">Adresse :</label>
         <textarea class="input-entry" id="input-adresse" name="adresse" type="text" required></textarea>
      <label for="ville">Ville :</label>
-        <input class="input-entry" id="input-ville" name="ville" type="text" required>
+        <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
     
-    <button type=""submit" id="finalize-order">Valider votre commande</button>
+    <button type=""submit" id="finalize-order" >Valider votre commande</button>
 </form>`
 
     reachFormContainer.innerHTML = formScheme;
-    }
+    };
 
 
 ///Ajout de l'évènement pour générer le formulaire au click
@@ -128,29 +128,104 @@ let reachOrderButton = document.getElementById("order-cart-button");
     reachOrderButton.addEventListener("click", (event) => {
         event.preventDefault();
         goToForm();
+
+        let finalizeOrder = document.getElementById("finalize-order");
+
+
+        ///Modification du style en fonction de si la valeur de l'input est correcte ou non
+        function validInput(elt) {
+            elt.style.border = 'solid 1px green'
+            elt.style.boxShadow = '#00800066 0px 0px 4px'
+        }
+
+        function invalidInput(elt) {
+            elt.style.border = 'solid 1px red'
+            elt.style.boxShadow = 'rgba(128, 0, 0, 0.4) 0px 0px 4px'
+          }
+
+
+            // création fonctions de validité prénom, nom, ville
+            function isValid(value) {
+                return /^[A-Z-a-z\s]{3,40}$/.test(value);
+            };
+
+                        document.querySelectorAll(".letter-input").forEach(item => {
+                        item.addEventListener("change", (event) => {
+                            if (isValid(item.value)) {
+                                event.preventDefault();
+                                validInput(item);
+                            } else {
+                                invalidInput(item)
+
+                            }
+                            })
+                        })
+
+
+           // création fonctions de validité mail
+            function validMail(value){
+                return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+            };
+
+                        let reachMailField = document.getElementById("input-mail")
+                        reachMailField.addEventListener("change", (event) => {
+                            if(validMail(reachMailField.value)) {
+                                validInput(reachMailField);
+                                event.preventDefault();
+                            } else {
+                                invalidInput(reachMailField)
+                            }
+                            
+                            
+                        })
+
     })
 
 
 
+
+
+
+
+
 ///------  Récupération des données du formulaire  --------------\\\
+
+
+        ///Contrôle des champs de formulaire
+
+
+/*
 let reachFinalizeOrder = document.getElementById("finalize-order")
 reachFinalizeOrder.addEventListener("click",  (event)=>{
 event.preventDefault();
-
-
-localStorage.setItem("prenom" ,document.getElementById("input-prenom").value);
-localStorage.setItem("nom" ,document.getElementById("input-nom").value);
-localStorage.setItem("" ,document.getElementById("input-adresse").value);
-localStorage.setItem("" ,document.getElementById("input-mail").value);
-localStorage.setItem("" ,document.getElementById("input-ville").value);
 })
-        
+
+
+
+  */      
 
 
 
 /////Test Validation formulaire//////
 
 
+// création fonctions de validité prénom, nom, ville
+
+
+// création fonctions de validité adresse
+function validAddress(value) {
+    return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
+};
+
+// création fonctions de validité mail
+function validMail(value){
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+};
+
+
+
+
+/////Test Validation formulaire//////
 
 
 /* A RECUPERER
@@ -165,3 +240,13 @@ localStorage.setItem("" ,document.getElementById("input-ville").value);
         }
 */
     
+
+
+
+
+
+
+
+
+
+

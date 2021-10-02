@@ -185,11 +185,11 @@ function fillShoppingCart(){
 
         //Génération Popup confirmation des achats
         const confirmPopUp = () => {
-            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyer sur OK pour continuer vos achats`)) {
+            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyez sur OK pour aller directement au panier. Annulez si vous souhaitez retourner à la page principale`)) {
                 window.location.href = "cart.html"
                 
             } else {
-                window.location.href = ""
+                window.location.href = "index.html"
             }
         }
 
@@ -237,35 +237,3 @@ function fillShoppingCart(){
 
 
 
-
-
-
-
-
-
- 
-
-/*
-//Generating Option
-const createOption = document.createElement('option')
-createOption.value = "default"
-createOptionField.appendChild(createOption)
-
-//Fill options with JSON array
-const select = document.getElementById("select-options")
-const options = article.lenses
-for(var i=0; i < options.lenght; i++)
-        {   
-            
-            var option = document.createElement("Option"),
-                inner = document.createTextNode(options[i])
-
-                option.appendChild(inner);
-
-            select.insertBefore(option,select.lastChild)
-
-            
-        }
-
-        */
-       
