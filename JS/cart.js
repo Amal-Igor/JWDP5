@@ -141,12 +141,6 @@ const goToForm = () => {
         <span class="help-popup" id="popup-4">Aucun chiffre ou symbole n'est autorisé</span>
         <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
     </div>
-
-    
-
-
-    
-
     
     <button type="submit" id="finalize-order" >Valider votre commande</button>
 </form>`
@@ -214,9 +208,7 @@ let reachOrderButton = document.getElementById("order-cart-button");
                                 event.preventDefault();
                             } else {
                                 invalidInput(reachMailField)
-                            }
-                            
-                            
+                            }                          
                         })
 
                     // création fonctions de validité adresse
@@ -234,6 +226,24 @@ let reachOrderButton = document.getElementById("order-cart-button");
                 }
             })
 
+
+
+
+                    //Récupération des données si le formulaire est valide
+
+            let reachSubmitButton = document.getElementById("finalize-order");
+
+            let getNameInput = document.getElementById("input-nom");
+
+            reachSubmitButton.addEventListener("click", (event) =>{
+                    console.log(getNameInput.value)
+            })
+                            //Récupération des valeurs du form
+            /*
+            reachSubmitButton.addEventListener("click", (event) =>{
+                if((isValid(firstName.value) && isValid(lastName.value) && validAddress(address.value) && isValid(city.value) && validMail(mail.value)))
+            })
+            */
 
     })
 
