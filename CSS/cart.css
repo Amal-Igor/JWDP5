@@ -15,7 +15,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
+    width: 85%;
     border: solid;
     margin: 2em auto 0 auto;
 }
@@ -25,8 +25,10 @@ form label{
 }
 
 .input-entry{
-    width: 35%; 
-    align-self: center;   
+    align-self: center;
+    grid-area: input;
+    width: 35vw;
+    max-width: 20em;
 }
 
 form button{
@@ -34,3 +36,99 @@ form button{
     align-self: center;   
 
 }
+
+.label-container{
+    display: grid;
+    grid-template-areas: 'label help  ' 'input  popup ';
+    position: relative;
+    align-items: center;
+}
+
+.input-label{
+    grid-area: label;
+}
+
+.help-icon{
+    font-size: 14px;
+    position: relative;
+    grid-area: help;
+    cursor: pointer;
+}
+
+.help-popup{
+    grid-area: popup;
+    border: solid;
+    position: absolute;
+    left: 50%;
+    z-index: 2;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0 5px;
+    visibility: hidden;
+    margin-left: 10px;
+    max-height: 2em;
+    width: max-content;
+}
+
+
+
+.help-popup::after {
+    position: absolute;
+    content: "";
+    right: 100%;
+    border-style: solid;
+    border-width: 10px;
+    top: 10%;
+    border-color: transparent #555 transparent transparent; 
+}
+
+
+.show-popup{
+    visibility: visible;
+    animation: fadeIn 1s;
+}
+
+/*Animation Popup*/
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+
+
+
+
+
+
+
+
+
+
+/*
+.input-label{
+    position: relative;
+    
+}
+
+.input-label::after{
+    font-family: 'Font Awesome 5 Free';
+    content: "\f059";
+    position: relative;
+    left: 10px;
+}
+
+.input-label:hover::after{
+    border: solid;
+    width: 5em;
+    position: relative;
+    left: 130px;
+}
+
+.letter-label::after{
+    
+    
+    
+}
+*/
