@@ -104,19 +104,51 @@ const goToForm = () => {
 
     const reachFormContainer = document.getElementById("form-sub-container");
 
-    const formScheme = `<form class="form-order">
-    <label for="nom">Nom :</label>
-      <input class="input-entry letter-input" id="input-nom" name="nom" type="text" required>            
-    <label for="prenom">Prénom :</label>
+    const formScheme = `<form class="form-order"> 
+    <div class="label-container">
+        <label class="input-label letter-label" for="nom">Nom :</label>
+        <i id="help-icon-1" class="help-icon __letter-input-help far fa-question-circle"></i>
+        <span class="help-popup" id="popup-1">Aucun chiffre ou symbole n'est autorisé</span>
+        <input class="input-entry letter-input" id="input-nom" name="nom" type="text" required>
+    </div>
+
+    <div class="label-container">           
+        <label class="input-label letter-label" for="prenom">Prénom :</label>
+        <i id="help-icon-2" class="help-icon __letter-input-help far fa-question-circle"></i>
+        <span class="help-popup" id="popup-2">Aucun chiffre ou symbole n'est autorisé</span>
         <input class="input-entry letter-input" id="input-prenom" name="prenom" type="text" required>
-    <label for="mail">Email :</label>
-         <input class="input-entry" id="input-mail" name="mail" type="text" required>
-    <label for="adresse">Adresse :</label>
-        <textarea class="input-entry" id="input-adresse" name="adresse" type="text" required></textarea>
-     <label for="ville">Ville :</label>
-        <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
+    </div>
+
     
-    <button type=""submit" id="finalize-order" >Valider votre commande</button>
+    <div class="label-container">
+        <label class="input-label " for="mail">Email :</label>
+        <i class="help-icon far fa-question-circle"></i>
+        <span class="help-popup" id="popup-3"> Veuillez rentrer une adresse mail valide</span>
+        <input class="input-entry" id="input-mail" name="mail" type="text" required>
+    </div>
+
+
+    <div class="label-container">
+        <label class="input-label " for="adresse">Adresse :</label>
+        <i class="help-icon far fa-question-circle"></i>
+        <span class="help-popup" id="popup-4">Aucun symbole n'est autorisé</span>
+        <textarea class="input-entry adresse-input" id="input-adress" name="adresse" type="text" required></textarea>
+    </div>
+
+    <div class="label-container">   
+        <label class="input-label letter-label" for="ville">Ville :</label>
+        <i class="help-icon __letter-input-help far fa-question-circle"></i>
+        <span class="help-popup" id="popup-4">Aucun chiffre ou symbole n'est autorisé</span>
+        <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
+    </div>
+
+    
+
+
+    
+
+    
+    <button type="submit" id="finalize-order" >Valider votre commande</button>
 </form>`
 
     reachFormContainer.innerHTML = formScheme;
@@ -143,7 +175,16 @@ let reachOrderButton = document.getElementById("order-cart-button");
             elt.style.boxShadow = 'rgba(128, 0, 0, 0.4) 0px 0px 4px'
           }
 
-
+        ///Affichage Popup d'aide en cas de mauvais complétion de l'input
+        document.querySelectorAll(".help-icon").forEach(item => {
+            item.addEventListener("click", function (evt) {
+                const help = evt.target.closest('.help-icon');
+                if (help) {
+                  help.closest('.label-container').querySelector('.help-popup').classList.toggle('show-popup');
+                }
+              });
+        })
+        
             // création fonctions de validité prénom, nom, ville
             function isValid(value) {
                 return /^[A-Z-a-z\s]{3,40}$/.test(value);
@@ -160,7 +201,6 @@ let reachOrderButton = document.getElementById("order-cart-button");
                             }
                             })
                         })
-
 
            // création fonctions de validité mail
             function validMail(value){
@@ -179,8 +219,25 @@ let reachOrderButton = document.getElementById("order-cart-button");
                             
                         })
 
+                    // création fonctions de validité adresse
+        function validAddress(value) {
+            return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
+        };
+
+            let reachAdressField = document.getElementById("input-adress")
+            reachAdressField.addEventListener("change", (event) => {
+                if(validAddress(reachAdressField.value)){
+                    validInput(reachAdressField);
+                    event.preventDefault();
+                } else {
+                    invalidInput(reachAdressField)
+                }
+            })
+
+
     })
 
+        
 
 
 
@@ -191,54 +248,13 @@ let reachOrderButton = document.getElementById("order-cart-button");
 ///------  Récupération des données du formulaire  --------------\\\
 
 
-        ///Contrôle des champs de formulaire
 
-
-/*
-let reachFinalizeOrder = document.getElementById("finalize-order")
-reachFinalizeOrder.addEventListener("click",  (event)=>{
-event.preventDefault();
-})
-
-
-
-  */      
+/////Test Validation formulaire//////
 
 
 
 /////Test Validation formulaire//////
 
-
-// création fonctions de validité prénom, nom, ville
-
-
-// création fonctions de validité adresse
-function validAddress(value) {
-    return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
-};
-
-// création fonctions de validité mail
-function validMail(value){
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
-};
-
-
-
-
-/////Test Validation formulaire//////
-
-
-/* A RECUPERER
-          //Mise en place des quantités
-         
-          for(l = 1; l <= 10; l++){
-            let reachQuantity = document.querySelectorAll(".product-quantity");
-        let createQuantityDropDown = document.createElement("option");
-        reachQuantity.appendChild(createQuantityDropDown);
-
-            
-        }
-*/
     
 
 
