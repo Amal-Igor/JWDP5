@@ -191,6 +191,8 @@ let reachOrderButton = document.getElementById("order-cart-button");
                                 validInput(item);
                             } else {
                                 invalidInput(item)
+                                alert("Merci de remplir les champs correctement afin de poursuivre la commande")
+
 
                             }
                             })
@@ -208,6 +210,8 @@ let reachOrderButton = document.getElementById("order-cart-button");
                                 event.preventDefault();
                             } else {
                                 invalidInput(reachMailField)
+                                alert("Merci de remplir les champs correctement afin de poursuivre la commande")
+
                             }                          
                         })
 
@@ -223,6 +227,7 @@ let reachOrderButton = document.getElementById("order-cart-button");
                     event.preventDefault();
                 } else {
                     invalidInput(reachAdressField)
+                    alert("Merci de remplir les champs correctement afin de poursuivre la commande")
                 }
             })
 
@@ -234,17 +239,74 @@ let reachOrderButton = document.getElementById("order-cart-button");
             let reachSubmitButton = document.getElementById("finalize-order");
 
             let getNameInput = document.getElementById("input-nom");
+            let getLastNameInput = document.getElementById("input-prenom");
+            let getCityInput = document.getElementById("input-ville");
+            let getMailInput = document.getElementById("input-mail");
+            let getAdressInput = document.getElementById("input-adress");
+
 
             reachSubmitButton.addEventListener("click", (event) =>{
-                    console.log(getNameInput.value)
-            })
-                            //Récupération des valeurs du form
-            /*
-            reachSubmitButton.addEventListener("click", (event) =>{
-                if((isValid(firstName.value) && isValid(lastName.value) && validAddress(address.value) && isValid(city.value) && validMail(mail.value)))
-            })
-            */
+                   event.preventDefault();
+                ///Création de l'objet Contact
 
+                let contact = {
+                    nom: getNameInput.value,
+                    prenom: getLastNameInput.value,
+                    mail: getMailInput.value,
+                    adresse: getAdressInput.value,
+                    ville: getCityInput.value,
+                }
+
+                console.log(contact)
+
+
+                ///Récupération des items
+
+                let cartProducts = [];
+                for ( cameraId of productLocalStorage){
+                    let productsId = cameraId.id; 
+                    cartProducts.push((productsId));
+                    console.log("yo" + productsId)
+                }
+                console.log( cartProducts);
+
+                let send = {
+                    contact,
+                    cartProducts,
+                }
+                    
+            
+
+            ///Envois des données au serveur 
+
+            const post = async function (data) {
+                try {
+                    let response = await fetch ('http://localhost:3000/api/cameras', {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if(response.ok) {
+                        let data = await response.json();
+                        console.log(data.orderId);
+                        localStorage.setItem("responseOrder", data.orderId);
+                        localStorage.removeItem("product");
+                } else {
+                    event.preventDefault();
+                    console.error('Retour du serveur : ', response.status);
+                    alert('Erreur rencontrée : ' + response.status);
+                } 
+            }  catch (error) {
+                    alert("Erreur : " + error);
+                }
+            };
+
+            post(send);
+        })
+                            
     })
 
         
