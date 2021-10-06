@@ -155,19 +155,16 @@ let reachOrderButton = document.getElementById("order-cart-button");
         event.preventDefault();
         goToForm();
 
-        let finalizeOrder = document.getElementById("finalize-order");
-
-
         ///Modification du style en fonction de si la valeur de l'input est correcte ou non
-        function validInput(elt) {
-            elt.style.border = 'solid 1px green'
-            elt.style.boxShadow = '#00800066 0px 0px 4px'
-        }
+    function validInput(elt) {
+        elt.style.border = 'solid 1px green'
+        elt.style.boxShadow = '#00800066 0px 0px 4px'
+    }
 
-        function invalidInput(elt) {
-            elt.style.border = 'solid 1px red'
-            elt.style.boxShadow = 'rgba(128, 0, 0, 0.4) 0px 0px 4px'
-          }
+    function invalidInput(elt) {
+        elt.style.border = 'solid 1px red'
+        elt.style.boxShadow = 'rgba(128, 0, 0, 0.4) 0px 0px 4px'
+        }
 
         ///Affichage Popup d'aide en cas de mauvais complétion de l'input
         document.querySelectorAll(".help-icon").forEach(item => {
@@ -185,52 +182,68 @@ let reachOrderButton = document.getElementById("order-cart-button");
             };
 
                         document.querySelectorAll(".letter-input").forEach(item => {
-                        item.addEventListener("change", (event) => {
-                            if (isValid(item.value)) {
-                                event.preventDefault();
-                                validInput(item);
-                            } else {
-                                invalidInput(item)
-                                alert("Merci de remplir les champs correctement afin de poursuivre la commande")
-
-
-                            }
+                            item.addEventListener("change", (event) => {
+                            function validateLetterInputs() {
+                                        if (isValid(item.value)) {
+                                            event.preventDefault();
+                                            validInput(item);
+                                            return true 
+                                        } else {
+                                            invalidInput(item)
+                                            return false                   
+                                        }}
+                            console.log(validateLetterInputs(item))
                             })
+                            
                         })
 
            // création fonctions de validité mail
             function validMail(value){
                 return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
             };
+          
+            let reachMailField = document.getElementById("input-mail")
+            reachMailField.addEventListener("change", (event) => {
 
-                        let reachMailField = document.getElementById("input-mail")
-                        reachMailField.addEventListener("change", (event) => {
-                            if(validMail(reachMailField.value)) {
-                                validInput(reachMailField);
-                                event.preventDefault();
-                            } else {
-                                invalidInput(reachMailField)
-                                alert("Merci de remplir les champs correctement afin de poursuivre la commande")
-
-                            }                          
-                        })
-
+                function validateMail() {
+                                
+                    if(validMail(reachMailField.value)){
+                        validInput(reachMailField);
+                            event.preventDefault();
+                            return true
+                                
+                    } else {
+                        invalidInput(reachMailField)                                
+                            return false
+                    }}
+            
+                            console.log(validateMail())
+            })
+                        
                     // création fonctions de validité adresse
         function validAddress(value) {
             return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
         };
 
             let reachAdressField = document.getElementById("input-adress")
-            reachAdressField.addEventListener("change", (event) => {
-                if(validAddress(reachAdressField.value)){
+            reachAdressField.addEventListener("change", () => {
+                function validateAdress() {
+
+                    if(validAddress(reachAdressField.value)){
                     validInput(reachAdressField);
                     event.preventDefault();
+                    return true
+                    
                 } else {
                     invalidInput(reachAdressField)
-                    alert("Merci de remplir les champs correctement afin de poursuivre la commande")
-                }
-            })
+                    return false
+                }}
 
+                console.log(validateAdress())
+            })
+   
+/*  
+*/ 
 
 
 
@@ -242,69 +255,84 @@ let reachOrderButton = document.getElementById("order-cart-button");
             let getLastNameInput = document.getElementById("input-prenom");
             let getCityInput = document.getElementById("input-ville");
             let getMailInput = document.getElementById("input-mail");
-            let getAdressInput = document.getElementById("input-adress");
+        
 
 
             reachSubmitButton.addEventListener("click", (event) =>{
                    event.preventDefault();
                 ///Création de l'objet Contact
 
+                const firstname = getNameInput.value;
+                const lastname = getLastNameInput.value
+                const email = getMailInput.value
+                const address =  reachAdressField.value
+                const city = getCityInput.value
+
                 let contact = {
-                    nom: getNameInput.value,
-                    prenom: getLastNameInput.value,
-                    mail: getMailInput.value,
-                    adresse: getAdressInput.value,
-                    ville: getCityInput.value,
+                    firstName:firstname,
+                    lastName: lastname,
+                    address: address,
+                    city: city,
+                    email: email,
                 }
-
-                console.log(contact)
-
-
-                ///Récupération des items
 
                 let cartProducts = [];
                 for ( cameraId of productLocalStorage){
                     let productsId = cameraId.id; 
                     cartProducts.push((productsId));
-                    console.log("yo" + productsId)
+                    console.log(productsId)
                 }
-                console.log( cartProducts);
 
-                let send = {
-                    contact,
-                    cartProducts,
-                }
+                  
+                console.log(contact)
+
+                const send = {
+                    contact: {
+                      firstName: firstname,
+                      lastName: lastname,
+                      address: address, 
+                      city: city,
+                      email: email,
+                    },
+
+                    products: cartProducts,
+                  }
+
+                ///Récupération des items
+
                     
-            
+            console.log(send)
+
+
+            const promiseOrder = fetch('http://localhost:3000/api/cameras/order', {
+                method: "POST",
+                body: JSON.stringify(send),
+                headers: {
+                    "Content-Type" : "application/json",
+                }
+            })
+
+            console.log(promiseOrder)
 
             ///Envois des données au serveur 
 
-            const post = async function (data) {
-                try {
-                    let response = await fetch ('http://localhost:3000/api/cameras', {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
+            promiseOrder.then(async(response) => {
+               try{
+                   console.log(response)
+                const contenu = await response.json();
+                console.log(contenu)
+                alert(`Merci ${firstname} pour votre commande. Nous allons vous rediriger vers la page de confirmation` )
+                window.localStorage.clear()
+                window.location.href = "index.html"
+                
 
-                    if(response.ok) {
-                        let data = await response.json();
-                        console.log(data.orderId);
-                        localStorage.setItem("responseOrder", data.orderId);
-                        localStorage.removeItem("product");
-                } else {
-                    event.preventDefault();
-                    console.error('Retour du serveur : ', response.status);
-                    alert('Erreur rencontrée : ' + response.status);
-                } 
-            }  catch (error) {
-                    alert("Erreur : " + error);
-                }
-            };
+            } catch (e) {
+                console.log(e)
+            }
+            })
+            
+            
 
-            post(send);
         })
                             
     })
@@ -313,21 +341,8 @@ let reachOrderButton = document.getElementById("order-cart-button");
 
 
 
-
-
-
-
-///------  Récupération des données du formulaire  --------------\\\
-
-
-
-/////Test Validation formulaire//////
-
-
-
-/////Test Validation formulaire//////
-
     
+
 
 
 
