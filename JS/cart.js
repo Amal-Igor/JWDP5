@@ -39,7 +39,7 @@ else {
             <div class="product-option cart-element"> ${productLocalStorage[x].option}</div>
             
             <div class="product-price cart-element">${productLocalStorage[x].prix} €</div>
-            <button type="button" id="delete-but" class="card-button cart-button product-delete cart-element">Supprimer</button>   
+            <button type="button" id="delete-but" class="card-button cart-button product-delete cart-element"><i class="fas fa-trash-alt"></i></button>   
         </div>
     
         `;
@@ -69,7 +69,7 @@ else {
         `<div class="bottom-label-container ">
 
             <div id="total-price" class="total-amount bottom-labels"><strong>Total : </strong> ${totalPrice} €</div>
-            <button id="clear-cart" class="bottom-labels card-button">Vider le panier</button>
+            <button id="clear-cart" class="bottom-labels card-button"><i class="fas fa-dumpster"></i></button>
             <button id="order-cart-button" class="bottom-labels card-button card-button order">Commander</button>
         </div>`;
         }

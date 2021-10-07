@@ -30,6 +30,28 @@ header{
     left: 5%;
 }
 
+/*FOOTER*/
+footer{
+    margin-top: auto;
+    height: 4em;
+    color: white;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.foot-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.foot-item {
+    margin: 0 10%;
+    padding-top: 1em;
+}
 
 
 /*Nav link*/
@@ -75,6 +97,7 @@ header{
     background: #000000bd;
     padding: 1em 1em;
     font-family: 'Open sans', sans-serif;
+    text-align: center;
 }
 
 /*Taille des images produits*/
@@ -105,7 +128,7 @@ img{
     display: grid;
     justify-content: center;
     align-items: first baseline;
-    grid-template-areas: 'img img' 'name price' 'product-sheet-link to-basket-button';
+    grid-template-areas: 'img img' 'name price' 'product-sheet-link product-sheet-link';
     grid-template-rows: 70% 15% 15%;
     height: 100%;
 }
@@ -191,7 +214,7 @@ color: white;
 }  
 
 
-@media all and (min-width: 500px) {
+@media all and (min-width: 400px) {
     
     .card-button::before{
         position: relative;

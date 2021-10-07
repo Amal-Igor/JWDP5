@@ -176,6 +176,10 @@ div#cart-labelling {
     grid-area: label-price;
 }
 
+.product-rows{
+    position: relative;
+}
+
 .product-quantity{
     grid-area: quantity;
 }
@@ -195,6 +199,7 @@ div#cart-labelling {
 
 .product-delete{
     grid-area: delete;
+    position: relative;
 }
 
 .cart-element, .cart-label{
@@ -261,7 +266,7 @@ button#clear-cart {
     }
 
     .bottom-label-container{
-        grid-template-areas: 'command  price-total delete-all';
+        grid-template-areas: ' command  price-total delete-all';
         justify-items: center;
         grid-template-columns:  1fr 1fr 1fr;
 }
@@ -269,20 +274,20 @@ button#clear-cart {
 #order-cart-button{
     justify-self: inherit;
 }
+}
 
-@media all and (min-width: 580px) and (max-width: 800px) {
+@media all and (min-width: 581px) and (max-width: 799px) {
     .label-container{
         margin-left: 10%;
     }
 
-    .bottom-label-container {
-        display: grid;
-        grid-template-areas: ' command price-total delete-all';
-        grid-template-columns: 1fr 1fr 1fr;
-        margin: 1em 0;
-    }
-    
-    #order-cart-button{
+    .bottom-label-container{
+        grid-template-areas: 'command  price-total delete-all';
+        justify-items: center;
+        grid-template-columns:  1fr 1fr 1fr;
+}
+
+#order-cart-button{
     justify-self: inherit;
 }
 
@@ -311,8 +316,8 @@ button#clear-cart {
         margin-left: inherit;
     }
 
-    .card-button, #total-price{
-        text-indent: -4px;
+    #total-price{
+        text-indent: -7px;
     }
     #total-price{
         font-size: 13px;
