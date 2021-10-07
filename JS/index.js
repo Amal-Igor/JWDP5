@@ -64,6 +64,7 @@ getJsonData
         })
 
         .catch(function(error) {
+          alert('Nos serveurs rencontrent actuellement un problème merci de réessayer plus tard')
           console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
         });
 }
