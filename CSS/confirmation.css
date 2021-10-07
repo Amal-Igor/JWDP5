@@ -1,0 +1,10 @@
+#confirm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+}
+
+#confirm-text{
+    font-size: 18px;
+}

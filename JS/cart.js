@@ -169,7 +169,7 @@ const goToForm = () => {
         <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
     </div>
     
-    <button type="submit" id="finalize-order" >Valider votre commande</button>
+    <button type="submit" class="card-button" id="finalize-order" >Valider votre commande</button>
 </form>`
 
     reachFormContainer.innerHTML = formScheme;
@@ -367,11 +367,10 @@ let reachOrderButton = document.getElementById("order-cart-button");
                    console.log(response)
                 const contenu = await response.json();
                 console.log(contenu)
-                /*
+                console.log(contenu.orderId)           
                 alert(`Merci ${firstname} pour votre commande. Nous allons vous rediriger vers la page de confirmation` )
-                window.location.href = "index.html"
-                */
-
+                window.localStorage.clear()
+                window.location.href = `confirmation.html?id=${contenu.orderId}`
             } catch (e) {
                 console.log(e)
             }
@@ -380,23 +379,13 @@ let reachOrderButton = document.getElementById("order-cart-button");
             
         } else {alert("Merci de corriger les champs qui affichent un message d'erreur")}
         })
+
+
+
+        
                          
     })
 
-
-
-    /*
-                        ///Application du style de l'input si il est mal rempli
-                        document.querySelectorAll(".letter-input").forEach(item => {
-                            item.addEventListener("change", (event) => {
-                                if (isValid(item.value)) {
-                                    event.preventDefault();
-                                    validInput(item);
-                                } else {
-                                    invalidInput(item)
-                                }                               
-                            })                     
-                        })
-                        */
+    
 
     
