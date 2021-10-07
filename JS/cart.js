@@ -4,7 +4,7 @@ console.log(productLocalStorage)
 
 
 //Génération de la page HTML
-const reachMainContainer = document.querySelector(".main-container")
+const reachMainContainer = document.getElementById("main-container")
 console.log(reachMainContainer)
 
 
@@ -24,25 +24,32 @@ if(productLocalStorage === null || productLocalStorage.length == 0) {
 else {
     let hydrateCart = [];
 
+    
+    
+    
+
     for (x = 0; x < productLocalStorage.length; x++) {
 
        
 
-        hydrateCart = hydrateCart + 
+        hydrateCart = hydrateCart +  `
 
-        `<div class="row container-fluid justify-content-center text-center">
-            <div class="product-name cart-element col "> ${productLocalStorage[x].nom}</div>
-            <div class="product-option cart-element col"> ${productLocalStorage[x].option}</div>
-            <div class="product-price cart-element col">${productLocalStorage[x].prix} €</div>
-            <button type="button" class="product-delete cart-element col">Bouton Supprimer</button>   
+        <div class="products-row ">
+            <div class="product-name cart-element"> ${productLocalStorage[x].nom}</div>
+            <div class="product-option cart-element"> ${productLocalStorage[x].option}</div>
+            
+            <div class="product-price cart-element">${productLocalStorage[x].prix} €</div>
+            <button type="button" id="delete-but" class="card-button cart-button product-delete cart-element">Supprimer</button>   
         </div>
+    
         `;
 
-
-   
     }
         if(x == productLocalStorage.length){
             ///Calcul du prix total du panier
+
+            
+        
         let calculPrice = [];
         for (let montant of productLocalStorage) {
         let article = montant.prix;
@@ -59,17 +66,40 @@ else {
 
         //Ajout des cases montant total + supprimer tout le panier
         reachMainContainer.innerHTML = hydrateCart + 
-        `<div class="row container-fluid justify-content-center text-center">
-            <div class="total-amount col">Prix total : ${totalPrice} €</div>
-            
-            <button id="order-cart-button" class="order col">Passer la commande</button>
+        `<div class="bottom-label-container ">
+
+            <div id="total-price" class="total-amount bottom-labels"><strong>Total : </strong> ${totalPrice} €</div>
+            <button id="clear-cart" class="bottom-labels card-button">Vider le panier</button>
+            <button id="order-cart-button" class="bottom-labels card-button card-button order">Commander</button>
         </div>`;
-        }    
+        }
+        
+        let reachDeleteAll = document.getElementById("clear-cart")
+        reachDeleteAll.addEventListener("click", (event) => {
+            if(confirm('Voulez-vous supprimer tous éléments contenus dans votre panier?')){
+                window.localStorage.clear();
+                window.location.href="cart.html"
+            }else{
+                console.log("nothing")
+            }
+        })
+        
 }
+
+
+///Ajout des labels du panier
+ let reachDisplay = document.querySelector(".products-row")
+            reachDisplay.insertAdjacentHTML('beforebegin', `
+    <div id="cart-labelling" class="">
+        <div class="cart-label cart-label__name ">Nom du produit</div>
+        <div class="cart-label cart-label__option">Option</div>
+        <div class="cart-label cart-label__quantity">Prix </div>
+        <div class="cart-label cart-label___price"></div>
+    </div>`)
+
 
 ///BOUTON POUR VIDER LE PANIER 
 
- /*<button id="empty-cart-button" class="empty-cart col">Vider le panier</button>*/ 
 
 //Ajout du bouton supprimer
 let reachDeleteButton = document.querySelectorAll(".product-delete");
@@ -104,17 +134,15 @@ const goToForm = () => {
 
     const reachFormContainer = document.getElementById("form-sub-container");
 
-    const formScheme = `<form class="form-order"> 
+    const formScheme = `<form class="form-order">
     <div class="label-container">
         <label class="input-label letter-label" for="nom">Nom :</label>
-        <i id="help-icon-1" class="help-icon __letter-input-help far fa-question-circle"></i>
         <span class="help-popup" id="popup-1">Min. 3 lettres, sans chiffre ni symbole</span>
         <input class="input-entry letter-input" id="input-nom" name="nom" type="text" required>
     </div>
 
     <div class="label-container">           
         <label class="input-label letter-label" for="prenom">Prénom :</label>
-        <i id="help-icon-2" class="help-icon __letter-input-help far fa-question-circle"></i>
         <span class="help-popup" id="popup-2">Min. 3 lettres, sans chiffres ni symboles</span>
         <input class="input-entry letter-input" id="input-prenom" name="prenom" type="text" required>
     </div>
@@ -122,7 +150,7 @@ const goToForm = () => {
     
     <div class="label-container">
         <label class="input-label " for="mail">Email :</label>
-        <i class="help-icon far fa-question-circle"></i>
+        
         <span class="help-popup" id="popup-3"> Veuillez rentrer une adresse mail valide</span>
         <input class="input-entry" id="input-mail" name="mail" type="text" required>
     </div>
@@ -130,14 +158,13 @@ const goToForm = () => {
 
     <div class="label-container">
         <label class="input-label " for="adresse">Adresse :</label>
-        <i class="help-icon far fa-question-circle"></i>
+        
         <span class="help-popup" id="popup-4">Merci d'indiquer un numéro et un nom de voie</span>
         <textarea class="input-entry adresse-input" id="input-adress" name="adresse" type="text" required></textarea>
     </div>
 
     <div class="label-container">   
         <label class="input-label letter-label" for="ville">Ville :</label>
-        <i class="help-icon __letter-input-help far fa-question-circle"></i>
         <span class="help-popup" id="popup-4">Min. 3 lettres, sans chiffre ni symbole</span>
         <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
     </div>
@@ -153,6 +180,7 @@ const goToForm = () => {
 let reachOrderButton = document.getElementById("order-cart-button");
     reachOrderButton.addEventListener("click", (event) => {
         event.preventDefault();
+        alert('Merci de bien vouloir remplir le formulaire pour poursuivre vos achats')
         goToForm();
 
         ///Modification du style en fonction de si la valeur de l'input est correcte ou non
@@ -166,21 +194,10 @@ let reachOrderButton = document.getElementById("order-cart-button");
         elt.style.boxShadow = 'rgba(128, 0, 0, 0.4) 0px 0px 4px'
         }
 
-        ///Affichage Popup d'aide en cas de mauvais complétion de l'input
-
-        /*
-        document.querySelectorAll(".help-icon").forEach(item => {
-            item.addEventListener("click", function (evt) {
-                const help = evt.target.closest('.help-icon');
-                if (help) {
-                  help.closest('.label-container').querySelector('.help-popup').classList.toggle('show-popup');
-                }
-              });
-        })*/
 
 
+        ////Control des inputs lettre Nom, Prénom, Ville
 
-        ////yo
         function isValid(value) {
             return /^[A-Z-a-z\s]{3,40}$/.test(value);
         };

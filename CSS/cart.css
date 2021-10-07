@@ -1,9 +1,20 @@
 *{
     box-sizing: border-box;
 }
+header{
+    margin-bottom: 1em;
+}
 
-main{
-    border: solid;
+#main-container {
+    width: 80vw;
+    margin: auto;
+    border: solid rgb(0 0 0 / 67%);
+    display: grid;
+    background-color: #d4d4d4;
+}
+
+.cart-title{
+    margin: 1em;
 }
 
 .empty-cart-container{
@@ -15,9 +26,18 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 85%;
+    width: 80vw;
+    padding: 1.2em 0;
     border: solid;
     margin: 2em auto 0 auto;
+    
+}
+
+.form-header{
+    margin-right: auto;
+    margin-left: 20px;
+    font-size: 22px;
+    margin-bottom: 1em;
 }
 
 form label{
@@ -29,6 +49,8 @@ form label{
     grid-area: input;
     width: 35vw;
     max-width: 20em;
+    margin: 0.5em 0;
+    background: #ebebeb;
 }
 
 form button{
@@ -39,14 +61,15 @@ form button{
 
 .label-container{
     display: grid;
-    grid-template-areas: 'label help  ' 'input  popup ';
+    grid-template-areas: 'label label  ' 'input  popup ';
     position: relative;
     align-items: center;
 }
 
 .input-label{
     grid-area: label;
-}
+    font-weight: 500;
+    font-size: 17px;}
 
 .help-icon{
     font-size: 14px;
@@ -99,6 +122,207 @@ form button{
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+
+
+
+  /*Display de la page panier*/
+.cart-label{
+    
+    color: white;
+    padding: .2em 0;
+}
+
+.container-cart-label{
+    margin-bottom: 1em;
+}
+
+.products-row{
+    margin-bottom: .7em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 'name option price delete';
+}
+
+div#cart-labelling {
+    display: grid;
+    width: 100%;
+    grid-template-areas: 'label-name label-option label-price .';
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: .5em;
+    background-color: rgb(0 0 0 / 67%);
+    justify-items: center;
+}
+.products-row {
+    justify-items: center;
+    align-items: center;
+}
+
+.cart-label{
+    padding: 0 auto ;
+    font-size: 17px;
+
+}
+
+.cart-label__name{
+    grid-area: label-name;
+}
+
+.cart-label__option{
+    grid-area: label-option;
+}
+
+.cart-label__prix{
+    grid-area: label-price;
+}
+
+.product-quantity{
+    grid-area: quantity;
+}
+
+.product-name{
+    grid-area: name;
+
+}
+
+.product-option{
+    grid-area:option;
+}
+
+.product-price{
+    grid-area: price;
+}
+
+.product-delete{
+    grid-area: delete;
+}
+
+.cart-element, .cart-label{
+    padding-left: 15px;
+}
+.cart-element {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.bottom-label-container{
+    display: grid;
+    grid-template-areas: ' . command  price-total delete-all';
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+    margin: 1em 0;
+}
+
+#total-price{
+    grid-area: price-total;
+
+}
+
+#clear-cart{
+    grid-area: delete-all;
+}
+
+#order-cart-button{
+    grid-area: command;
+    justify-self: START;
+}
+
+button#clear-cart {
+    background: #cd2c2cd9;
+}
+
+#clear-cart:hover {
+	background:linear-gradient(to bottom, #cd2c2cd9 5%, #f06f6fc7 100%);
+	background-color:#cd2c2cd9;
+}
+#clear-cart:active {
+	position:relative;
+	top:1px;
+}
+
+
+@media all and (min-width: 550px) and (max-width: 1120px) {
+    body{
+        max-width: 1200px;
+    }
+   .form-order, #main-container{
+        width: 95vw;
+        margin: 1em 1em;
+    }
+
+    .form-order{
+        align-items: flex-start;
+    }
+    
+}
+
+@media all and (min-width: 800px) and (max-width: 1119px){
+    .label-container{
+        margin-left: 25%;
+    }
+
+    .bottom-label-container{
+        grid-template-areas: 'command  price-total delete-all';
+        justify-items: center;
+        grid-template-columns:  1fr 1fr 1fr;
+}
+
+#order-cart-button{
+    justify-self: inherit;
+}
+
+@media all and (min-width: 580px) and (max-width: 800px) {
+    .label-container{
+        margin-left: 10%;
+    }
+
+    .bottom-label-container {
+        display: grid;
+        grid-template-areas: ' command price-total delete-all';
+        grid-template-columns: 1fr 1fr 1fr;
+        margin: 1em 0;
+    }
+    
+    #order-cart-button{
+    justify-self: inherit;
+}
+
+}
+
+@media all and (max-width: 580px) {
+
+    
+    .help-popup{
+        display: none;
+    }
+
+    .bottom-label-container{
+        grid-template-areas: ' command  price-total delete-all';
+        grid-template-columns:  1fr 1fr 1fr;
+        grid-template-rows: 2em;
+        margin: 1em 1em;
+    }
+
+    .cart-element {
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    #total-price{
+        margin-left: inherit;
+    }
+
+    .card-button, #total-price{
+        text-indent: -4px;
+    }
+    #total-price{
+        font-size: 13px;
+    }
+
+    .form-order{
+        align-items: center;
+    }
+
+}
 
 
 
