@@ -108,14 +108,14 @@ const goToForm = () => {
     <div class="label-container">
         <label class="input-label letter-label" for="nom">Nom :</label>
         <i id="help-icon-1" class="help-icon __letter-input-help far fa-question-circle"></i>
-        <span class="help-popup" id="popup-1">Aucun chiffre ou symbole n'est autorisé</span>
+        <span class="help-popup" id="popup-1">Min. 3 lettres, sans chiffre ni symbole</span>
         <input class="input-entry letter-input" id="input-nom" name="nom" type="text" required>
     </div>
 
     <div class="label-container">           
         <label class="input-label letter-label" for="prenom">Prénom :</label>
         <i id="help-icon-2" class="help-icon __letter-input-help far fa-question-circle"></i>
-        <span class="help-popup" id="popup-2">Aucun chiffre ou symbole n'est autorisé</span>
+        <span class="help-popup" id="popup-2">Min. 3 lettres, sans chiffres ni symboles</span>
         <input class="input-entry letter-input" id="input-prenom" name="prenom" type="text" required>
     </div>
 
@@ -131,14 +131,14 @@ const goToForm = () => {
     <div class="label-container">
         <label class="input-label " for="adresse">Adresse :</label>
         <i class="help-icon far fa-question-circle"></i>
-        <span class="help-popup" id="popup-4">Aucun symbole n'est autorisé</span>
+        <span class="help-popup" id="popup-4">Merci d'indiquer un numéro et un nom de voie</span>
         <textarea class="input-entry adresse-input" id="input-adress" name="adresse" type="text" required></textarea>
     </div>
 
     <div class="label-container">   
         <label class="input-label letter-label" for="ville">Ville :</label>
         <i class="help-icon __letter-input-help far fa-question-circle"></i>
-        <span class="help-popup" id="popup-4">Aucun chiffre ou symbole n'est autorisé</span>
+        <span class="help-popup" id="popup-4">Min. 3 lettres, sans chiffre ni symbole</span>
         <input class="input-entry letter-input" id="input-ville" name="ville" type="text" required>
     </div>
     
@@ -167,6 +167,8 @@ let reachOrderButton = document.getElementById("order-cart-button");
         }
 
         ///Affichage Popup d'aide en cas de mauvais complétion de l'input
+
+        /*
         document.querySelectorAll(".help-icon").forEach(item => {
             item.addEventListener("click", function (evt) {
                 const help = evt.target.closest('.help-icon');
@@ -174,98 +176,128 @@ let reachOrderButton = document.getElementById("order-cart-button");
                   help.closest('.label-container').querySelector('.help-popup').classList.toggle('show-popup');
                 }
               });
-        })
+        })*/
+
+
+
+        ////yo
+        function isValid(value) {
+            return /^[A-Z-a-z\s]{3,40}$/.test(value);
+        };
+        ///Validation form
+        let getNameInput = document.getElementById("input-nom");
         
-            // création fonctions de validité prénom, nom, ville
-            function isValid(value) {
-                return /^[A-Z-a-z\s]{3,40}$/.test(value);
-            };
+        function validateName() {
+                if(isValid(getNameInput.value)){
+                    validInput(getNameInput)
+                    getNameInput.closest('.label-container').querySelector('.help-popup').classList.remove('show-popup');
+                    return true
+                    
+                } else {
+                    getNameInput.closest('.label-container').querySelector('.help-popup').classList.add('show-popup');
+                    invalidInput(getNameInput)
+                    return false
+                }     
+        }
 
-                        document.querySelectorAll(".letter-input").forEach(item => {
-                            item.addEventListener("change", (event) => {
-                            function validateLetterInputs() {
-                                        if (isValid(item.value)) {
-                                            event.preventDefault();
-                                            validInput(item);
-                                            return true 
-                                        } else {
-                                            invalidInput(item)
-                                            return false                   
-                                        }}
-                            console.log(validateLetterInputs(item))
-                            })
-                            
-                        })
+        getNameInput.addEventListener("change", validateName, false)
 
+        
+
+            let getLastNameInput = document.getElementById("input-prenom");
+            function validateLastName() {            
+                if(isValid(getLastNameInput.value)){
+                    
+                    validInput(getLastNameInput)
+                    getLastNameInput.closest('.label-container').querySelector('.help-popup').classList.remove('show-popup');
+                    console.log(event.target.value)
+                    return true  
+                } else {
+                    invalidInput(getLastNameInput)
+                    getLastNameInput.closest('.label-container').querySelector('.help-popup').classList.add('show-popup');
+                    console.log(document.querySelector('.help-popup').classList)
+                    return false             
+                }
+            }
+            getLastNameInput.addEventListener("change", validateLastName, true)
+
+        
+            
+            ///Vérification validité Ville
+            let getCityInput = document.getElementById("input-ville");
+            function validateCity() {
+                if(isValid(getCityInput.value)){
+                    validInput(getCityInput)
+                    getCityInput.closest('.label-container').querySelector('.help-popup').classList.remove('show-popup');
+                    return true
+                } else {
+                    invalidInput(getCityInput)
+                    getCityInput.closest('.label-container').querySelector('.help-popup').classList.add('show-popup');
+                    return false
+                }
+            }
+
+            getCityInput.addEventListener("change", validateCity, true )
+            
+            
+            
            // création fonctions de validité mail
             function validMail(value){
                 return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
             };
           
-            let reachMailField = document.getElementById("input-mail")
-            reachMailField.addEventListener("change", (event) => {
-
+            let getMailInput = document.getElementById("input-mail");
                 function validateMail() {
                                 
-                    if(validMail(reachMailField.value)){
-                        validInput(reachMailField);
+                    if( validMail(getMailInput.value)){
+                        validInput(getMailInput);
                             event.preventDefault();
+                            getMailInput.closest('.label-container').querySelector('.help-popup').classList.remove('show-popup');
                             return true
                                 
                     } else {
-                        invalidInput(reachMailField)                                
-                            return false
+                        invalidInput(getMailInput)
+                        getMailInput.closest('.label-container').querySelector('.help-popup').classList.add('show-popup');                          
+                          return false
                     }}
+
+            getMailInput.addEventListener("change", validateMail, true)            
+
+
             
-                            console.log(validateMail())
-            })
                         
                     // création fonctions de validité adresse
         function validAddress(value) {
             return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
         };
-
-            let reachAdressField = document.getElementById("input-adress")
-            reachAdressField.addEventListener("change", () => {
-                function validateAdress() {
-
-                    if(validAddress(reachAdressField.value)){
-                    validInput(reachAdressField);
+            let getAdressField = document.getElementById("input-adress")
+            function validateAdress() {
+                    if(validAddress(getAdressField.value)){
+                    validInput(getAdressField);
                     event.preventDefault();
+                    getAdressField.closest('.label-container').querySelector('.help-popup').classList.remove('show-popup');
                     return true
                     
                 } else {
-                    invalidInput(reachAdressField)
+                    invalidInput(getAdressField)
+                    getAdressField.closest('.label-container').querySelector('.help-popup').classList.add('show-popup');
                     return false
                 }}
-
-                console.log(validateAdress())
-            })
-   
-/*  
-*/ 
-
-
-
+            
+            getAdressField.addEventListener("change", validateAdress, true)
+              
                     //Récupération des données si le formulaire est valide
 
-            let reachSubmitButton = document.getElementById("finalize-order");
-
-            let getNameInput = document.getElementById("input-nom");
-            let getLastNameInput = document.getElementById("input-prenom");
-            let getCityInput = document.getElementById("input-ville");
-            let getMailInput = document.getElementById("input-mail");
-        
-
-
-            reachSubmitButton.addEventListener("click", (event) =>{
-                   event.preventDefault();
+            let reachSubmitButton = document.getElementById("finalize-order")
+            reachSubmitButton.addEventListener("click", (event) => {
+            if(validateName() && validateLastName () && validateCity() && validateMail() && validateAdress()) {
+                 event.preventDefault();
                 ///Création de l'objet Contact
 
                 const firstname = getNameInput.value;
                 const lastname = getLastNameInput.value
                 const email = getMailInput.value
-                const address =  reachAdressField.value
+                const address =  getAdressField.value
                 const city = getCityInput.value
 
                 let contact = {
@@ -283,9 +315,6 @@ let reachOrderButton = document.getElementById("order-cart-button");
                     console.log(productsId)
                 }
 
-                  
-                console.log(contact)
-
                 const send = {
                     contact: {
                       firstName: firstname,
@@ -293,13 +322,13 @@ let reachOrderButton = document.getElementById("order-cart-button");
                       address: address, 
                       city: city,
                       email: email,
-                    },
+                },
 
                     products: cartProducts,
+                    
                   }
 
-                ///Récupération des items
-
+                
                     
             console.log(send)
 
@@ -321,10 +350,10 @@ let reachOrderButton = document.getElementById("order-cart-button");
                    console.log(response)
                 const contenu = await response.json();
                 console.log(contenu)
+                /*
                 alert(`Merci ${firstname} pour votre commande. Nous allons vous rediriger vers la page de confirmation` )
-                window.localStorage.clear()
                 window.location.href = "index.html"
-                
+                */
 
             } catch (e) {
                 console.log(e)
@@ -332,24 +361,25 @@ let reachOrderButton = document.getElementById("order-cart-button");
             })
             
             
-
+        } else {alert("Merci de corriger les champs qui affichent un message d'erreur")}
         })
-                            
+                         
     })
 
-        
 
 
+    /*
+                        ///Application du style de l'input si il est mal rempli
+                        document.querySelectorAll(".letter-input").forEach(item => {
+                            item.addEventListener("change", (event) => {
+                                if (isValid(item.value)) {
+                                    event.preventDefault();
+                                    validInput(item);
+                                } else {
+                                    invalidInput(item)
+                                }                               
+                            })                     
+                        })
+                        */
 
     
-
-
-
-
-
-
-
-
-
-
-

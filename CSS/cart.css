@@ -90,6 +90,10 @@ form button{
     animation: fadeIn 1s;
 }
 
+.hide-popup{
+    visibility: hidden;
+}
+
 /*Animation Popup*/
 @keyframes fadeIn {
     from {opacity: 0;}
