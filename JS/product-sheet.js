@@ -185,7 +185,7 @@ function fillShoppingCart(){
 
         //Génération Popup confirmation des achats
         const confirmPopUp = () => {
-            if (window.confirm(`${article.name} ajouté au panier avec l'option ${optionChoice}. Appuyez sur OK pour aller directement au panier. Annulez si vous souhaitez retourner à la page principale`)) {
+            if (window.alert(`${article.name} ajouté au panier avec l'option ${optionChoice}.`)) {
                 window.location.href = "cart.html"
                 
             } else {
